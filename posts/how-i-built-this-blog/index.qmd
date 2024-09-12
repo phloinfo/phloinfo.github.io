@@ -4,6 +4,7 @@ author: "Phlo"
 date: "2024-09-12"
 categories: [web]
 ---
+This post is a step-by-step guide on how I built this blog using Quarto.
 
 # Install Quarto
 - Download and install from https://quarto.org/docs/download/
@@ -63,6 +64,10 @@ git push
 
 # One time publish command
 `quarto publish gh-pages`
+
+# Change repo Pages settings
+- Settings -> Pages -> Source -> Branch: gh-pages
+- Save
 
 # Configure GitHub Actions
 - mkdir .github/workflows
