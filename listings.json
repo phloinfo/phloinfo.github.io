@@ -2,8 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/how-i-built-this-blog/index.html",
       "/posts/strikethrough-on-custom-vs-code-themes/index.html",
+      "/posts/how-i-built-this-blog/index.html",
       "/posts/using-stable-audio-tools-on-apple-silicon/index.html"
     ]
   }
