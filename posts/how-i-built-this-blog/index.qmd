@@ -1,0 +1,150 @@
+---
+title: "How I Built This Blog"
+author: "Phlo"
+date: "2024-09-12"
+categories: [web]
+---
+
+# Install Quarto
+- Download and install from https://quarto.org/docs/download/
+
+# Prepare IDE
+- Set up separate, portable VS Code used for technical writing
+
+# Set up GitHub repository
+- Create new repository on GitHub called `username.github.io`
+  - Any repo name other than `username.github.io` will be shown as `username.github.io/reponame/` on the web
+- Clone it to local machine
+
+# Initialize Quarto Blog Template
+`quarto create-project --title BLOG-NAME --type website --template blog`
+ 
+# Change output-dir to gh-pages
+```diff
+diff --git a/_quarto.yml b/_quarto.yml
+--- a/_quarto.yml
++++ b/_quarto.yml
+@@ -1,5 +1,6 @@
+ project:
+   type: website
++  output-dir: gh-pages
+ 
+ website:
+   title: "BLOG-NAME"
+```
+
+# Create a .nojekyll file
+```sh
+touch .nojekyll
+```
+
+```bat
+type NUL > .nojekyll
+```
+
+# Add 2 folders to .gitignore
+```
+/venv
+/gh-pages
+```
+
+# Create requirements.txt for Quarto venv
+```
+matplotlib==3.9.2
+pandas==2.2.2
+```
+
+# Push it to github
+```sh
+git add .
+git commit -S -m "initialize quarto blog template"
+git push
+```
+
+# One time publish command
+`quarto publish gh-pages`
+
+# Configure GitHub Actions
+- mkdir .github/workflows
+- Add a workflow file to `.github/workflows/publish.yml`
+
+```yaml
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: Quarto Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install Python and Dependencies
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: pip install jupyter
+      - run: pip install -r requirements.txt
+
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+# Render and preview
+`quarto preview --render all`
+
+# Bonus: Customize the look of the blog
+```diff
+diff --git a/_quarto.yml b/_quarto.yml
+--- a/_quarto.yml
++++ b/_quarto.yml
+@@ -13,7 +13,7 @@ website:
+         href: https://twitter.com
+ format:
+   html:
+-    theme: cosmo
++    theme: lux
+     css: styles.css
+ 
+ 
+diff --git a/about.qmd b/about.qmd
+--- a/about.qmd
++++ b/about.qmd
+@@ -2,7 +2,7 @@
+ title: "About"
+ image: profile.jpg
+ about:
+-  template: jolla
++  template: broadside
+   links:
+     - icon: twitter
+       text: Twitter
+diff --git a/index.qmd b/index.qmd
+--- a/index.qmd
++++ b/index.qmd
+@@ -8,7 +8,7 @@ listing:
+   sort-ui: false
+   filter-ui: false
+ page-layout: full
+-title-block-banner: true
++title-block-banner: false
+ ---
+```
+
+## TODO List
+- Add Custom Domain
+- Add Google Analytics

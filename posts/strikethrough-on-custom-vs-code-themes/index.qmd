@@ -1,0 +1,32 @@
+---
+title: "Strikethrough on Custom VS Code Themes"
+author: "Phlo"
+date: "2024-09-12"
+categories: [til, tools, ide]
+---
+
+# Missing Strikethrough on Custom VS Code Themes
+
+I ran into an issue with a custom VS Code theme that I downloaded from vscodethemes dot com. In any markdown file I opened the strikethrough was missing. If I reverted to a default theme, the strikethrough would re-appear.
+
+I was able to fix this (thanks to GPT4) by adding the following code to the `theme.json` file.
+
+On Windows it was in `C:\Users\{USERNAME}\.vscode\extensions\{theme-id}\themes\theme.json` on Mac it was in `~/.vscode/extensions/{theme-id}/themes/theme.json`:
+
+## Code
+```json
+    "tokenColors": [
+    {
+      "name": "Strikethrough",
+      "scope": "markup.strikethrough.markdown",
+      "settings": {
+        "fontStyle": "strikethrough"
+      }
+    },
+```
+
+The `tokenColors` array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.
+
+Shout out to xynny for the [Blazing Red](https://vscodethemes.com/e/xynny.blazing-red/blazing-red?language=python) theme - way easier on my eyes than the default "Red" theme.
+
+Another theme I tested ([Military](https://marketplace.visualstudio.com/items?itemName=TechnoNinja.vsc-military-style)) had the same issue and the fix above worked for me.

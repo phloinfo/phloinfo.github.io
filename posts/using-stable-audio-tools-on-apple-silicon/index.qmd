@@ -1,0 +1,103 @@
+---
+title: "Using Stable Audio Tools on Apple Silicon"
+author: "Phlo"
+date: "2024-09-12"
+categories: [ai, music]
+---
+
+# Stable Audio Tools and Apple Silicon
+
+Stable Audio Tools will default to using the CPU if it doesn't detect a CUDA device. But it only takes a few adjustments of the original repo to make Stable Audio Tools utilize the Apple Silicon inside your machine if you have an M1 or better. Using a finetuned version of the base model I reduced my sample generation time from 51 seconds per generation (on `cpu`) to ~17 seconds per generation (on `mps`). This model was finetuned to generate samples only 3 seconds long but I was happy to cut inference time in half.
+
+Here are the commands I used to create a python environment for inferencing Stable Audio locally.
+
+Before we get started:
+```sh
+- Operating System
+ProductName:		macOS
+ProductVersion:		14.1
+BuildVersion:		23B2073
+Kernel:				23.1.0
+
+- Environment
+zsh:		5.9 (x86_64-apple-darwin23.0)
+Homebrew:	4.3.5
+Python:		3.8.19
+```
+
+Note: `brew install python3.8` as brew is one of the easiest ways to manage multiple python version versions on the same machine.
+
+# Environment Commands
+```sh
+cd "$HOME/code/ml/music/generation/"
+git clone https://github.com/Stability-AI/stable-audio-tools
+cd stable-audio-tools/
+python3.8 -m venv venv-sat
+venv-sat/bin/python -m pip install --upgrade pip wheel
+# Something about setuptools 70 release broke pkg_resources
+venv-sat/bin/python -m pip install setuptools==69.5.1
+
+# Activate the environment
+source venv-sat/bin/activate
+
+# Run the remaining commands within the activated environment
+pip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu
+pip install .
+
+# INFERENCE
+# Base Model 
+python run_gradio.py --ckpt-path models/base/model.ckpt --model-config models/base/model_config.json
+
+# Finetuned Model 
+python run_gradio.py --ckpt-path models/finetune_banyan/model_banyan.ckpt --model-config models/finetune_banyan/model_config_banyan.json
+```
+
+# Script Commands
+These are the adjustments I made to the python scripts in the repo:
+>>> `git diff`
+```diff
+diff --git a/stable_audio_tools/inference/generation.py b/stable_audio_tools/inference/generation.py
+index 843ab4b..74f4bb9 100644
+--- a/stable_audio_tools/inference/generation.py
++++ b/stable_audio_tools/inference/generation.py
+@@ -14,7 +14,7 @@ def generate_diffusion_uncond(
+         batch_size: int = 1,
+         sample_size: int = 2097152,
+         seed: int = -1,
+-        device: str = "cuda",
++        device: str = "mps",
+         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,
+         init_noise_level: float = 1.0,
+         return_latents = False,
+@@ -99,7 +99,7 @@ def generate_diffusion_cond(
+         sample_size: int = 2097152,
+         sample_rate: int = 48000,
+         seed: int = -1,
+-        device: str = "cuda",
++        device: str = "mps",
+         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,
+         init_noise_level: float = 1.0,
+         mask_args: dict = None,
+diff --git a/stable_audio_tools/interface/gradio.py b/stable_audio_tools/interface/gradio.py
+index b46c8d4..a1b8b10 100644
+--- a/stable_audio_tools/interface/gradio.py
++++ b/stable_audio_tools/interface/gradio.py
+@@ -665,7 +665,7 @@ def create_ui(model_config_path=None, ckpt_path=None, pretrained_name=None, pret
+     else:
+         model_config = None
+ 
+-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+     _, model_config = load_model(model_config, ckpt_path, pretrained_name=pretrained_name, pretransform_ckpt_path=pretransform_ckpt_path, model_half=model_half, device=device)
+     
+     model_type = model_config["model_type"]
+```
+
+In plain english that means I edited line 90 of `.py`
+
+
+# Installing asitop for monitoring
+In my journey to utilize MPS I came across [asitop](https://tlkh.github.io/asitop/). It allows you to monitor what percentage of your Apple GPU is being used in the CLI, among other things. After installing `asitop` into its own python `venv` I created an alias for `asitop` in `~/.zprofile` making it easier to quickly open the monitor:
+`alias asitop="sudo $HOME/code/asito/venv-asi/bin/asitop"`
+
+`brew install asitop` probably works just as well.
