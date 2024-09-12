@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
+    "href": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
+    "title": "Using Stable Audio Tools on Apple Silicon",
+    "section": "",
+    "text": "Stable Audio Tools and Apple Silicon\nStable Audio Tools will default to using the CPU if it doesn’t detect a CUDA device. But it only takes a few adjustments of the original repo to make Stable Audio Tools utilize the Apple Silicon inside your machine if you have an M1 or better. Using a finetuned version of the base model I reduced my sample generation time from 51 seconds per generation (on cpu) to ~17 seconds per generation (on mps). This model was finetuned to generate samples only 3 seconds long but I was happy to cut inference time in half.\nHere are the commands I used to create a python environment for inferencing Stable Audio locally.\nBefore we get started:\n- Operating System\nProductName:        macOS\nProductVersion:     14.1\nBuildVersion:       23B2073\nKernel:             23.1.0\n\n- Environment\nzsh:        5.9 (x86_64-apple-darwin23.0)\nHomebrew:   4.3.5\nPython:     3.8.19\nNote: brew install python3.8 as brew is one of the easiest ways to manage multiple python version versions on the same machine.\n\n\nEnvironment Commands\ncd \"$HOME/code/ml/music/generation/\"\ngit clone https://github.com/Stability-AI/stable-audio-tools\ncd stable-audio-tools/\npython3.8 -m venv venv-sat\nvenv-sat/bin/python -m pip install --upgrade pip wheel\n# Something about setuptools 70 release broke pkg_resources\nvenv-sat/bin/python -m pip install setuptools==69.5.1\n\n# Activate the environment\nsource venv-sat/bin/activate\n\n# Run the remaining commands within the activated environment\npip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu\npip install .\n\n# INFERENCE\n# Base Model \npython run_gradio.py --ckpt-path models/base/model.ckpt --model-config models/base/model_config.json\n\n# Finetuned Model \npython run_gradio.py --ckpt-path models/finetune_banyan/model_banyan.ckpt --model-config models/finetune_banyan/model_config_banyan.json\n\n\nScript Commands\nThese are the adjustments I made to the python scripts in the repo: &gt;&gt;&gt; git diff\ndiff --git a/stable_audio_tools/inference/generation.py b/stable_audio_tools/inference/generation.py\nindex 843ab4b..74f4bb9 100644\n--- a/stable_audio_tools/inference/generation.py\n+++ b/stable_audio_tools/inference/generation.py\n@@ -14,7 +14,7 @@ def generate_diffusion_uncond(\n         batch_size: int = 1,\n         sample_size: int = 2097152,\n         seed: int = -1,\n-        device: str = \"cuda\",\n+        device: str = \"mps\",\n         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,\n         init_noise_level: float = 1.0,\n         return_latents = False,\n@@ -99,7 +99,7 @@ def generate_diffusion_cond(\n         sample_size: int = 2097152,\n         sample_rate: int = 48000,\n         seed: int = -1,\n-        device: str = \"cuda\",\n+        device: str = \"mps\",\n         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,\n         init_noise_level: float = 1.0,\n         mask_args: dict = None,\ndiff --git a/stable_audio_tools/interface/gradio.py b/stable_audio_tools/interface/gradio.py\nindex b46c8d4..a1b8b10 100644\n--- a/stable_audio_tools/interface/gradio.py\n+++ b/stable_audio_tools/interface/gradio.py\n@@ -665,7 +665,7 @@ def create_ui(model_config_path=None, ckpt_path=None, pretrained_name=None, pret\n     else:\n         model_config = None\n \n-    device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n+    device = torch.device(\"mps\" if torch.backends.mps.is_available() else \"cpu\")\n     _, model_config = load_model(model_config, ckpt_path, pretrained_name=pretrained_name, pretransform_ckpt_path=pretransform_ckpt_path, model_half=model_half, device=device)\n     \n     model_type = model_config[\"model_type\"]\nIn plain english that means I edited line 90 of .py\n\n\nInstalling asitop for monitoring\nIn my journey to utilize MPS I came across asitop. It allows you to monitor what percentage of your Apple GPU is being used in the CLI, among other things. After installing asitop into its own python venv I created an alias for asitop in ~/.zprofile making it easier to quickly open the monitor: alias asitop=\"sudo $HOME/code/asito/venv-asi/bin/asitop\"\nbrew install asitop probably works just as well."
+  },
+  {
+    "objectID": "posts/how-i-built-this-blog/index.html",
+    "href": "posts/how-i-built-this-blog/index.html",
+    "title": "How I Built This Blog",
+    "section": "",
+    "text": "Download and install from https://quarto.org/docs/download/"
+  },
+  {
+    "objectID": "posts/how-i-built-this-blog/index.html#todo-list",
+    "href": "posts/how-i-built-this-blog/index.html#todo-list",
+    "title": "How I Built This Blog",
+    "section": "TODO List",
+    "text": "TODO List\n\nAdd Custom Domain\nAdd Google Analytics"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "phloinfo",
+    "section": "",
+    "text": "How I Built This Blog\n\n\n\n\n\n\nweb\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nPhlo\n\n\n\n\n\n\n\n\n\n\n\n\nStrikethrough on Custom VS Code Themes\n\n\n\n\n\n\ntil\n\n\ntools\n\n\nide\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nPhlo\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\n\n\n\nai\n\n\nmusic\n\n\n\n\n\n\n\n\n\nSep 12, 2024\n\n\nPhlo\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/strikethrough-on-custom-vs-code-themes/index.html",
+    "href": "posts/strikethrough-on-custom-vs-code-themes/index.html",
+    "title": "Strikethrough on Custom VS Code Themes",
+    "section": "",
+    "text": "I ran into an issue with a custom VS Code theme that I downloaded from vscodethemes dot com. In any markdown file I opened the strikethrough was missing. If I reverted to a default theme, the strikethrough would re-appear.\nI was able to fix this (thanks to GPT4) by adding the following code to the theme.json file.\nOn Windows it was in C:\\Users\\{USERNAME}\\.vscode\\extensions\\{theme-id}\\themes\\theme.json on Mac it was in ~/.vscode/extensions/{theme-id}/themes/theme.json:\n\n\n    \"tokenColors\": [\n    {\n      \"name\": \"Strikethrough\",\n      \"scope\": \"markup.strikethrough.markdown\",\n      \"settings\": {\n        \"fontStyle\": \"strikethrough\"\n      }\n    },\nThe tokenColors array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.\nShout out to xynny for the Blazing Red theme - way easier on my eyes than the default “Red” theme.\nAnother theme I tested (Military) had the same issue and the fix above worked for me."
+  },
+  {
+    "objectID": "posts/strikethrough-on-custom-vs-code-themes/index.html#code",
+    "href": "posts/strikethrough-on-custom-vs-code-themes/index.html#code",
+    "title": "Strikethrough on Custom VS Code Themes",
+    "section": "",
+    "text": "\"tokenColors\": [\n    {\n      \"name\": \"Strikethrough\",\n      \"scope\": \"markup.strikethrough.markdown\",\n      \"settings\": {\n        \"fontStyle\": \"strikethrough\"\n      }\n    },\nThe tokenColors array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.\nShout out to xynny for the Blazing Red theme - way easier on my eyes than the default “Red” theme.\nAnother theme I tested (Military) had the same issue and the fix above worked for me."
+  }
+]
