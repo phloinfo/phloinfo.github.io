@@ -5,7 +5,7 @@ date: "2024-09-12"
 categories: [web]
 image: "how-i-built-this-blog-using-quarto.jpg"
 ---
-This post is a step-by-step guide on how I built this blog using Quarto.
+A short walkthrough on the tools, commands and code used to build this blog with Quarto.
 
 # Install Quarto
 - Download and install from https://quarto.org/docs/download/
@@ -14,12 +14,14 @@ This post is a step-by-step guide on how I built this blog using Quarto.
 - Set up separate, portable VS Code used for technical writing
 
 # Set up GitHub repository
-- Create new repository on GitHub called `username.github.io`
+- Create new repository on GitHub named `username.github.io`
   - Any repo name other than `username.github.io` will be shown as `username.github.io/reponame/` on the web
 - Clone it to local machine
 
 # Initialize Quarto Blog Template
-`quarto create-project --title BLOG-NAME --type website --template blog`
+```sh
+quarto create-project --title BLOG-NAME --type website --template blog
+```
  
 # Change output-dir to gh-pages
 ```diff
@@ -36,22 +38,24 @@ diff --git a/_quarto.yml b/_quarto.yml
 ```
 
 # Create a .nojekyll file
+Unix
 ```sh
 touch .nojekyll
 ```
 
+Windows
 ```bat
 type NUL > .nojekyll
 ```
 
 # Add 2 folders to .gitignore
-```
+```default
 /venv
 /gh-pages
 ```
 
 # Create requirements.txt for Quarto venv
-```
+```default
 matplotlib==3.9.2
 pandas==2.2.2
 ```
@@ -64,14 +68,17 @@ git push
 ```
 
 # One time publish command
-`quarto publish gh-pages`
+```sh
+quarto publish gh-pages
+```
 
 # Change repo Pages settings
-- Settings -> Pages -> Source -> Branch: gh-pages
+- Go to `https://github.com/username/username.github.io/settings/pages`
+- Repo -> Settings -> Pages -> Source -> Branch: gh-pages
 - Save
 
 # Configure GitHub Actions
-- mkdir .github/workflows
+- `mkdir .github/workflows`
 - Add a workflow file to `.github/workflows/publish.yml`
 
 ```yaml
@@ -111,7 +118,9 @@ jobs:
 ```
 
 # Render and preview
-`quarto preview --render all`
+```sh
+quarto preview --render all
+```
 
 # Bonus: Customize the look of the blog
 ```diff
@@ -125,8 +134,6 @@ diff --git a/_quarto.yml b/_quarto.yml
 -    theme: cosmo
 +    theme: lux
      css: styles.css
- 
- 
 diff --git a/about.qmd b/about.qmd
 --- a/about.qmd
 +++ b/about.qmd
