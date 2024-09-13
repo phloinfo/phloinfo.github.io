@@ -3,6 +3,7 @@ title: "Using Stable Audio Tools on Apple Silicon"
 author: "Phlo"
 date: "2024-09-12"
 categories: [ai, music]
+image: stable-audio-open.png
 ---
 
 # Stable Audio Tools and Apple Silicon

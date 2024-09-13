@@ -3,6 +3,7 @@ title: "Strikethrough on Custom VS Code Themes"
 author: "Phlo"
 date: "2024-09-12"
 categories: [til, tools, ide]
+image: missing-strikethrough-on-custom-vs-code-themes.jpg
 ---
 
 # Missing Strikethrough on Custom VS Code Themes
