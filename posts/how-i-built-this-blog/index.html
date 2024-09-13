@@ -189,20 +189,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>A short walkthrough on the tools, commands and code used to build this blog with Quarto.</p>
-<section id="install-quarto" class="level1">
-<h1>Install Quarto</h1>
+<section id="install-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="install-quarto">Install Quarto</h2>
 <ul>
 <li>Download and install from https://quarto.org/docs/download/</li>
 </ul>
 </section>
-<section id="prepare-ide" class="level1">
-<h1>Prepare IDE</h1>
+<section id="prepare-ide" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-ide">Prepare IDE</h2>
 <ul>
 <li>Set up separate, portable VS Code used for technical writing</li>
 </ul>
 </section>
-<section id="set-up-github-repository" class="level1">
-<h1>Set up GitHub repository</h1>
+<section id="set-up-github-repository" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-github-repository">Set up GitHub repository</h2>
 <ul>
 <li>Create new repository on GitHub named <code>username.github.io</code>
 <ul>
@@ -211,12 +211,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Clone it to local machine</li>
 </ul>
 </section>
-<section id="initialize-quarto-blog-template" class="level1">
-<h1>Initialize Quarto Blog Template</h1>
+<section id="initialize-quarto-blog-template" class="level2">
+<h2 class="anchored" data-anchor-id="initialize-quarto-blog-template">Initialize Quarto Blog Template</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project <span class="at">--title</span> BLOG-NAME <span class="at">--type</span> website <span class="at">--template</span> blog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="change-output-dir-to-gh-pages" class="level1">
-<h1>Change output-dir to gh-pages</h1>
+<section id="change-output-dir-to-gh-pages" class="level2">
+<h2 class="anchored" data-anchor-id="change-output-dir-to-gh-pages">Change output-dir to gh-pages</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">diff --git a/_quarto.yml b/_quarto.yml</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">--- a/_quarto.yml</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/_quarto.yml</span></span>
@@ -228,43 +228,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> website:</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   title: "BLOG-NAME"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="create-a-.nojekyll-file" class="level1">
-<h1>Create a .nojekyll file</h1>
+<section id="create-a-.nojekyll-file" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-.nojekyll-file">Create a .nojekyll file</h2>
 <p>Unix</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> .nojekyll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Windows</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bat code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> NUL <span class="kw">&gt;</span> .nojekyll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="add-2-folders-to-.gitignore" class="level1">
-<h1>Add 2 folders to .gitignore</h1>
+<section id="add-2-folders-to-.gitignore" class="level2">
+<h2 class="anchored" data-anchor-id="add-2-folders-to-.gitignore">Add 2 folders to .gitignore</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>/venv</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>/gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="create-requirements.txt-for-quarto-venv" class="level1">
-<h1>Create requirements.txt for Quarto venv</h1>
+<section id="create-requirements.txt-for-quarto-venv" class="level2">
+<h2 class="anchored" data-anchor-id="create-requirements.txt-for-quarto-venv">Create requirements.txt for Quarto venv</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>matplotlib==3.9.2</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pandas==2.2.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="push-it-to-github" class="level1">
-<h1>Push it to github</h1>
+<section id="push-it-to-github" class="level2">
+<h2 class="anchored" data-anchor-id="push-it-to-github">Push it to github</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-S</span> <span class="at">-m</span> <span class="st">"initialize quarto blog template"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="one-time-publish-command" class="level1">
-<h1>One time publish command</h1>
+<section id="one-time-publish-command" class="level2">
+<h2 class="anchored" data-anchor-id="one-time-publish-command">One time publish command</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="change-repo-pages-settings" class="level1">
-<h1>Change repo Pages settings</h1>
+<section id="change-repo-pages-settings" class="level2">
+<h2 class="anchored" data-anchor-id="change-repo-pages-settings">Change repo Pages settings</h2>
 <ul>
 <li>Go to <code>https://github.com/username/username.github.io/settings/pages</code></li>
 <li>Repo -&gt; Settings -&gt; Pages -&gt; Source -&gt; Branch: gh-pages</li>
 <li>Save</li>
 </ul>
 </section>
-<section id="configure-github-actions" class="level1">
-<h1>Configure GitHub Actions</h1>
+<section id="configure-github-actions" class="level2">
+<h2 class="anchored" data-anchor-id="configure-github-actions">Configure GitHub Actions</h2>
 <ul>
 <li><code>mkdir .github/workflows</code></li>
 <li>Add a workflow file to <code>.github/workflows/publish.yml</code></li>
@@ -303,12 +303,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">env</span><span class="kw">:</span></span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">GITHUB_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="render-and-preview" class="level1">
-<h1>Render and preview</h1>
+<section id="render-and-preview" class="level2">
+<h2 class="anchored" data-anchor-id="render-and-preview">Render and preview</h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview <span class="at">--render</span> all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="bonus-customize-the-look-of-the-blog" class="level1">
-<h1>Bonus: Customize the look of the blog</h1>
+<section id="bonus-customize-the-look-of-the-blog" class="level2">
+<h2 class="anchored" data-anchor-id="bonus-customize-the-look-of-the-blog">Bonus: Customize the look of the blog</h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">diff --git a/_quarto.yml b/_quarto.yml</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">--- a/_quarto.yml</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/_quarto.yml</span></span>
@@ -341,8 +341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="st">-title-block-banner: true</span></span>
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="va">+title-block-banner: false</span></span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a> ---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="todo-list" class="level2">
-<h2 class="anchored" data-anchor-id="todo-list">TODO List</h2>
+<section id="todo-list" class="level3">
+<h3 class="anchored" data-anchor-id="todo-list">TODO List</h3>
 <ul>
 <li>Add Custom Domain</li>
 <li>Add Google Analytics</li>
