@@ -7,23 +7,23 @@ image: "how-i-built-this-blog-using-quarto.jpg"
 ---
 A short walkthrough on the tools, commands and code used to build this blog with Quarto.
 
-# Install Quarto
+## Install Quarto
 - Download and install from https://quarto.org/docs/download/
 
-# Prepare IDE
+## Prepare IDE
 - Set up separate, portable VS Code used for technical writing
 
-# Set up GitHub repository
+## Set up GitHub repository
 - Create new repository on GitHub named `username.github.io`
   - Any repo name other than `username.github.io` will be shown as `username.github.io/reponame/` on the web
 - Clone it to local machine
 
-# Initialize Quarto Blog Template
+## Initialize Quarto Blog Template
 ```sh
 quarto create-project --title BLOG-NAME --type website --template blog
 ```
  
-# Change output-dir to gh-pages
+## Change output-dir to gh-pages
 ```diff
 diff --git a/_quarto.yml b/_quarto.yml
 --- a/_quarto.yml
@@ -37,7 +37,7 @@ diff --git a/_quarto.yml b/_quarto.yml
    title: "BLOG-NAME"
 ```
 
-# Create a .nojekyll file
+## Create a .nojekyll file
 Unix
 ```sh
 touch .nojekyll
@@ -48,36 +48,36 @@ Windows
 type NUL > .nojekyll
 ```
 
-# Add 2 folders to .gitignore
+## Add 2 folders to .gitignore
 ```default
 /venv
 /gh-pages
 ```
 
-# Create requirements.txt for Quarto venv
+## Create requirements.txt for Quarto venv
 ```default
 matplotlib==3.9.2
 pandas==2.2.2
 ```
 
-# Push it to github
+## Push it to github
 ```sh
 git add .
 git commit -S -m "initialize quarto blog template"
 git push
 ```
 
-# One time publish command
+## One time publish command
 ```sh
 quarto publish gh-pages
 ```
 
-# Change repo Pages settings
+## Change repo Pages settings
 - Go to `https://github.com/username/username.github.io/settings/pages`
 - Repo -> Settings -> Pages -> Source -> Branch: gh-pages
 - Save
 
-# Configure GitHub Actions
+## Configure GitHub Actions
 - `mkdir .github/workflows`
 - Add a workflow file to `.github/workflows/publish.yml`
 
@@ -117,12 +117,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-# Render and preview
+## Render and preview
 ```sh
 quarto preview --render all
 ```
 
-# Bonus: Customize the look of the blog
+## Bonus: Customize the look of the blog
 ```diff
 diff --git a/_quarto.yml b/_quarto.yml
 --- a/_quarto.yml
@@ -158,6 +158,6 @@ diff --git a/index.qmd b/index.qmd
  ---
 ```
 
-## TODO List
+### TODO List
 - Add Custom Domain
 - Add Google Analytics
