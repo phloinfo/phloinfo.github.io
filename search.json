@@ -23,9 +23,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "phloinfo",
+    "title": "phlo.info",
     "section": "",
-    "text": "Strikethrough on Custom VS Code Themes\n\n\n\ntil\n\n\ntools\n\n\nide\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\nai\n\n\nmusic\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Strikethrough on Custom VS Code Themes\n\n\n\ntil\n\n\ntools\n\n\nide\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\nai\n\n\nmusic\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -39,7 +39,7 @@
     "href": "posts/how-i-built-this-blog/index.html",
     "title": "How I Built This Blog",
     "section": "",
-    "text": "This post is a step-by-step guide on how I built this blog using Quarto."
+    "text": "A short walkthrough on the tools, commands and code used to build this blog with Quarto."
   },
   {
     "objectID": "posts/how-i-built-this-blog/index.html#todo-list",
