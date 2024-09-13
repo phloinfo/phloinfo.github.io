@@ -1,5 +1,5 @@
 ---
-title: "phloinfo"
+title: "phlo.info"
 listing:
   contents: posts
   sort: "date desc"
