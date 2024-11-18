@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Visualizing Datasets: AI Engineer Summit Fall 2023</title>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+.slide {
+  border-top: 3px solid #666;
+  display: flex;
+  /* Without this the slide images stretch in height to match text: */
+  align-items: flex-start;
+  /* Allow the text to wrap rather than constantly squeezing */
+  flex-wrap: wrap;
+}
+.slide img {
+  margin: 10px 10px 10px 0;
+}
+.slide div {
+  margin-top: 10px;
+  /* Fill remaining space next to the image */
+  width: calc(100% - 470px);
+  /* But wrap if we would be less than 450px wide */
+  min-width: 400px;
+  max-width: 100%;
+}
+.resp-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+  margin-bottom: 1em;
+}
+.resp-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
+</head>
+<body class="entry-wide">
+<div id="wrapper">
+<div id="primary">
+<div class="entry entryPage">
+<h2>Visualizing Datasets: AI Engineer Talk (Fall 2023)</h2>
+<p>Hat tip to @SimonW for <a href="https://simonwillison.net/2023/Aug/6/annotated-presentations/">the annotation format</a>.</p>
+<div class="resp-container">
+<iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Lvlru9jEb5Q" width="560"> </iframe>
+</div>
+<div class="slide">
+<img alt="Visualizing Datasets by Phlo" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (1).png" style="max-width: 100%;" width="450"/>
+<div><p>
+<ul>
+<li><strong>Speaker's Background</strong>: Junior AI engineer with a focus on generative AI and language models.</li>
+<li><strong>Experience</strong>: Self-taught, hands-on experience with various generative AI tools.</li>
+<li><strong>Talk Objective</strong>: To present visualized datasets relevant to AI engineering.</li>
+</ul>
+</p></div>
+</div>
+<div class="slide">
+<img alt="Leaderboard Datasets
+Puffin
+SkunkWorks
+Open Hermes
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (2).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>Puffin Dataset</strong>: Small but potent, only 3,000 records. Known for efficacy in fine-tuning base models.</p>
+<ul>
+<li>Visualization: Scatter plot shows topic clusters.</li>
+<li>Additional Info: Provides word scores to analyze prevalent topics.</li>
+</ul>
+</li>
+<li><p><strong>SkunkWorks MOE Dataset</strong>: Part of the open-source community's effort to compete with GPT-4.</p>
+<ul>
+<li>Size: 1.5 million rows, but only 10% is visualized.</li>
+<li>Customization: Tool allows for viewing all 1.5 million rows if desired.</li>
+<li>Topic Clusters: Displays most-mentioned words in large topic clusters.</li>
+</ul>
+</li>
+<li><p><strong>Open Hermes Dataset</strong>: Another dataset used to fine-tune top models.</p>
+<ul>
+<li>Highlight: Showcases diversity in vocabulary, topics, and plot shapes.</li>
+</ul>
+</li>
+<li><p><strong>General Takeaway</strong>: Datasets have unique characteristics that influence fine-tuning outcomes.</p>
+<ul>
+<li>Visualization Tools: Multiple plugins for scatter plots allow for different views of clusters.</li>
+</ul>
+</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="Who should visualize their data?
+- Created a Dataset
+- Curating Datasets
+- Langchain Agents
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (3).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>Individual Practitioners</strong>: Useful for understanding the characteristics of self-created datasets.</p>
+<ul>
+<li>Specific Use-Case: Discovering surprising patterns or conversations in the data.</li>
+</ul>
+</li>
+<li><p><strong>Organizations</strong>: Essential for those looking to fine-tune models on company-specific data.</p>
+<ul>
+<li>Dataset Curation: Combining company data with high-performing open-source datasets.</li>
+</ul>
+</li>
+<li><p><strong>Langchhain Agents</strong>: Agents that query documents and collect data can benefit from visualization.</p>
+</li>
+<li><p><strong>Retrieval Agents (RAG)</strong>: Visualization aids in comprehending the topical landscape of embedded documents.</p>
+</li>
+<li><p><strong>Personal Interest</strong>: Like the speaker, if you're keen on understanding what makes certain datasets special.</p>
+<ul>
+<li>Fine-Tuning: Build your own dataset for more targeted model training.</li>
+</ul>
+</li>
+<li><p><strong>General Utility</strong>: Visualizing large datasets offers a powerful way to understand their makeup.</p>
+</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="Visualizing is beneficial
+
+Different perspective
+- Topic Clusters
+
+Local Data
+- No ChatGPT
+- Personal Data
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (4).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>Topic Balance</strong>: Visualization helps identify if your dataset is skewed towards certain topics like math or logic.</p>
+</li>
+<li><p><strong>Alternative to Traditional Methods</strong>: Moves beyond SQL, databases, and CSVs to offer a new perspective.</p>
+</li>
+<li><p><strong>Data Privacy</strong>: Allows for keeping data local, useful for company or personal data.</p>
+</li>
+<li><p><strong>Role-Playing Models</strong>: Method is suitable for exploring NSFW or other specialized datasets.</p>
+</li>
+<li><p><strong>Limitations</strong>: </p>
+<ul>
+<li>Data Size: Difficult to fit very large datasets into interactive graphs.</li>
+<li>Non-Deterministic: Multiple runs may yield different topics and labels even with the same settings.</li>
+</ul>
+</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="Hardware Required™
+RTX 3060 or better
+
+M1 or M2
+
+Suggested Software
+Windows - WSL2
+
+MacOS
+
+Linux
+
+Google Colab
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (5).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>GPU Recommendations</strong>: Nvidia 3060 or better for gaming PCs.</p>
+<ul>
+<li>AMD/Intel GPUs: Slower due to lack of CUDA cores.</li>
+</ul>
+</li>
+<li><p><strong>Apple Computers</strong>: M1 or M2 chips are sufficient but will run on CPU.</p>
+<ul>
+<li>GGML Dependency: Future optimizations expected.</li>
+</ul>
+</li>
+<li><p><strong>Operating Systems</strong>: </p>
+<ul>
+<li>Windows: Use WSL2 for compatibility.</li>
+<li>Unix-based: Mac OS and Linux generally work without issues.</li>
+</ul>
+</li>
+<li><p><strong>Google Colab</strong>: An alternative, albeit less private, option.</p>
+</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="Tutorial
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (6).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>GitHub Repo</strong>: All steps and code snippets available in a public repository.</p>
+<ul>
+<li><a href="https://github.com/YoungPhlo/visualizing-datasets-ai-engineer-fall-2023">https://github.com/YoungPhlo/visualizing-datasets-ai-engineer-fall-2023</a></li>
+</ul>
+</li>
+<li><p><strong>Included Resources</strong>: </p>
+<ul>
+<li>Notebook with the tutorial steps.</li>
+<li>Additional code snippets for implementation.</li>
+</ul>
+</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="I’ve learned...
+
+- There may be some things hiding in the dataset
+- If presenting a dataset to a manager, a board, an investor this is compelling
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (7).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><strong>Insights from Creators</strong>: Visualization often reveals overlooked aspects of the dataset.</li>
+<li><strong>Presenting to Stakeholders</strong>: Effective for conveying complex data to managers, boards, or investors in an understandable manner.</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="Exploring further
+- pip install bulk
+- pip install galactic-ai
+- pip install gonk-ai
+- pip install lilac
+- Nomic
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (8).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>Other Tools on Radar</strong>: </p>
+<ul>
+<li>Bulk, Galactic, Lilac are gaining attention.</li>
+<li>Gonk is a new entrant worth exploring.</li>
+</ul>
+</li>
+<li><p><strong>Collaboration Opportunities</strong>: </p>
+<ul>
+<li>Open to testing community-created tools.</li>
+<li>Willing to assist in exploring specific datasets.</li>
+</ul>
+</li>
+</ul></p></div></div>
+<div class="slide">
+<img alt="Send me visualizations
+@YoungPhlo
+" height="100%" loading="lazy" src="Visualizing Datasets - AI.Engineer 2023 (9).png" style="max-width: 100%;" width="450"/>
+
+<div><p><ul>
+<li><p><strong>Extended Tutorial</strong>:</p>
+<ul>
+<li>Open to helping resolve issues, especially related to GPU setup with WSL2.</li>
+</ul>
+</li>
+<li><p><strong>Feedback Welcome</strong>: </p>
+<ul>
+<li>Encourages constructive criticism for process improvement.</li>
+<li>Actively monitoring and responding to questions in comments.</li>
+</ul>
+</li>
+<li><p><strong>Call to Action</strong>: </p>
+<ul>
+<li>Invites audience to use the process and share their visualizations.</li>
+</ul>
+</li>
+</ul></p></div></div>
+</div>
+</div> <!-- #primary -->
+<div id="secondary">
+</div> <!-- #secondary -->
+</div> <!-- #wrapper -->
+
+<script type="text/javascript">
+var sc_project=6572373; 
+var sc_invisible=1; 
+var sc_security="2fbe2aae"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="web statistics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/6572373/0/2fbe2aae/1/"
+alt="web statistics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+
+</body>
+</html>
