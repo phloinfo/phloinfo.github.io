@@ -5,7 +5,6 @@ project:
     port: 5567
 website:
   title: "phlo.info"
-  site-url: https://phlo.info
   navbar:
     right:
       - about.qmd
@@ -13,6 +12,11 @@ website:
         href: https://github.com/YoungPhlo
       - icon: twitter
         href: https://twitter.com/YoungPhlo_
+  site-url: https://phlo.info
+  google-analytics: G-177976EM3E
+  twitter-card: true
+  open-graph: true
+
 format:
   html:
     theme: sandstone
