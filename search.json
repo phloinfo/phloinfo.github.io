@@ -1,10 +1,66 @@
 [
   {
-    "objectID": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
-    "href": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
-    "title": "Using Stable Audio Tools on Apple Silicon",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Stable Audio Tools and Apple Silicon\nStable Audio Tools will default to using the CPU if it doesn’t detect a CUDA device. But it only takes a few adjustments of the original repo to make Stable Audio Tools utilize the Apple Silicon inside your machine if you have an M1 or better. Using a finetuned version of the base model I reduced my sample generation time from 51 seconds per generation (on cpu) to ~17 seconds per generation (on mps). This model was finetuned to generate samples only 3 seconds long but I was happy to cut inference time in half.\nHere are the commands I used to create a python environment for inferencing Stable Audio locally.\nBefore we get started:\n- Operating System\nProductName:        macOS\nProductVersion:     14.1\nBuildVersion:       23B2073\nKernel:             23.1.0\n\n- Environment\nzsh:        5.9 (x86_64-apple-darwin23.0)\nHomebrew:   4.3.5\nPython:     3.8.19\nNote: brew install python3.8 as brew is one of the easiest ways to manage multiple python version versions on the same machine.\n\n\nEnvironment Commands\ncd \"$HOME/code/ml/music/generation/\"\ngit clone https://github.com/Stability-AI/stable-audio-tools\ncd stable-audio-tools/\npython3.8 -m venv venv-sat\nvenv-sat/bin/python -m pip install --upgrade pip wheel\n# Something about setuptools 70 release broke pkg_resources\nvenv-sat/bin/python -m pip install setuptools==69.5.1\n\n# Activate the environment\nsource venv-sat/bin/activate\n\n# Run the remaining commands within the activated environment\npip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu\npip install .\n\n# INFERENCE\n# Base Model \npython run_gradio.py --ckpt-path models/base/model.ckpt --model-config models/base/model_config.json\n\n# Finetuned Model \npython run_gradio.py --ckpt-path models/finetune_banyan/model_banyan.ckpt --model-config models/finetune_banyan/model_config_banyan.json\n\n\nScript Commands\nThese are the adjustments I made to the python scripts in the repo: &gt;&gt;&gt; git diff\ndiff --git a/stable_audio_tools/inference/generation.py b/stable_audio_tools/inference/generation.py\nindex 843ab4b..74f4bb9 100644\n--- a/stable_audio_tools/inference/generation.py\n+++ b/stable_audio_tools/inference/generation.py\n@@ -14,7 +14,7 @@ def generate_diffusion_uncond(\n         batch_size: int = 1,\n         sample_size: int = 2097152,\n         seed: int = -1,\n-        device: str = \"cuda\",\n+        device: str = \"mps\",\n         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,\n         init_noise_level: float = 1.0,\n         return_latents = False,\n@@ -99,7 +99,7 @@ def generate_diffusion_cond(\n         sample_size: int = 2097152,\n         sample_rate: int = 48000,\n         seed: int = -1,\n-        device: str = \"cuda\",\n+        device: str = \"mps\",\n         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,\n         init_noise_level: float = 1.0,\n         mask_args: dict = None,\ndiff --git a/stable_audio_tools/interface/gradio.py b/stable_audio_tools/interface/gradio.py\nindex b46c8d4..a1b8b10 100644\n--- a/stable_audio_tools/interface/gradio.py\n+++ b/stable_audio_tools/interface/gradio.py\n@@ -665,7 +665,7 @@ def create_ui(model_config_path=None, ckpt_path=None, pretrained_name=None, pret\n     else:\n         model_config = None\n \n-    device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n+    device = torch.device(\"mps\" if torch.backends.mps.is_available() else \"cpu\")\n     _, model_config = load_model(model_config, ckpt_path, pretrained_name=pretrained_name, pretransform_ckpt_path=pretransform_ckpt_path, model_half=model_half, device=device)\n     \n     model_type = model_config[\"model_type\"]\nIn plain english that means I edited line 90 of .py\n\n\nInstalling asitop for monitoring\nIn my journey to utilize MPS I came across asitop. It allows you to monitor what percentage of your Apple GPU is being used in the CLI, among other things. After installing asitop into its own python venv I created an alias for asitop in ~/.zprofile making it easier to quickly open the monitor: alias asitop=\"sudo $HOME/code/asito/venv-asi/bin/asitop\"\nbrew install asitop probably works just as well."
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/why-i-built-this-blog/index.html",
+    "href": "posts/why-i-built-this-blog/index.html",
+    "title": "Why I Built This Blog",
+    "section": "",
+    "text": "A portfolio of projects, communicated through a blog."
+  },
+  {
+    "objectID": "posts/why-i-built-this-blog/index.html#why-a-blog",
+    "href": "posts/why-i-built-this-blog/index.html#why-a-blog",
+    "title": "Why I Built This Blog",
+    "section": "Why a Blog?",
+    "text": "Why a Blog?\nI don’t have a portfolio. For years this has made it difficult to communicate my value.\nThis is my living résumé. A demonstration of value to collaborators, clients, employers alike.\nThe plan is multimodal posts. This blog extends the videos, images, and audio I already create for work and play. It’s a platform for structured thoughts (compared to tweets or short form content) more concise than long form videos. A public record of my journey through professional life.\nUltimately: A way for friends to peer into whatever rabbit hole I’ve fallen down at the time."
+  },
+  {
+    "objectID": "posts/why-i-built-this-blog/index.html#vision-for-content",
+    "href": "posts/why-i-built-this-blog/index.html#vision-for-content",
+    "title": "Why I Built This Blog",
+    "section": "Vision for Content",
+    "text": "Vision for Content\n\nLearning in public. Taking complex resources, breaking them down and explaining them in my own words. (Inspiration)\nDeep Dive series. Focused explorations of topics like RLHF, Voice Agents, Evals and things near and dear to my heart like entrepreneurship, music.\nBuilding in public. Showcasing various tools, techniques, and workflows I use to complete projects."
+  },
+  {
+    "objectID": "posts/why-i-built-this-blog/index.html#motivation-for-writing",
+    "href": "posts/why-i-built-this-blog/index.html#motivation-for-writing",
+    "title": "Why I Built This Blog",
+    "section": "Motivation for Writing",
+    "text": "Motivation for Writing\n\nBuilding a portfolio of interesting work is what I need to attract the right opportunities\nDocumenting a body of work in the absence of formal credentials makes earning trust much easier\nRevisiting my journey will matter deeply to me in the future\n\nEverything that led me to this point has been poorly documented and I look back with regret today - imagine in 20 years.\nTo expand on these points:\nIn every job or project, there are 2 buckets of skills at play: My skills for optimizing a workflow and the skills I am actually being utilized for.\n\n\n\n\n\nIn almost every case recently, there’s not enough overlap. Which tells me I need to get better at communicating the benefits of my other skill sets.\nHow else can I earn trust in my abilities when starting new relationships?\nWriting is also a way to honor my creative journey, so it does not die in the graveyard of the “projects” folder on my hard drive. I’ve been building tools to solve my own problems since 2019 (29 tools and counting) but most of that work has never seen the light of day.\nFinally, writing is about financial stability. The underlying goal is to make this a magnet for: projects I want to work on, people I want to work with, compensation that supports my family."
+  },
+  {
+    "objectID": "posts/why-i-built-this-blog/index.html#mission",
+    "href": "posts/why-i-built-this-blog/index.html#mission",
+    "title": "Why I Built This Blog",
+    "section": "Mission",
+    "text": "Mission\nThe goal is to attract the right opportunities, connect with fellow builders, and illuminate a path for others who, like me, are forging their own way."
+  },
+  {
+    "objectID": "posts/strikethrough-on-custom-vs-code-themes/index.html",
+    "href": "posts/strikethrough-on-custom-vs-code-themes/index.html",
+    "title": "Strikethrough on Custom VS Code Themes",
+    "section": "",
+    "text": "I ran into an issue with a custom VS Code theme that I downloaded from vscodethemes dot com. In any markdown file I opened the strikethrough was missing. If I reverted to a default theme, the strikethrough would re-appear.\nI was able to fix this (thanks to GPT4) by adding the following code to the theme.json file.\nOn Windows it was in C:\\Users\\{USERNAME}\\.vscode\\extensions\\{theme-id}\\themes\\theme.json on Mac it was in ~/.vscode/extensions/{theme-id}/themes/theme.json:\n\n\n    \"tokenColors\": [\n    {\n      \"name\": \"Strikethrough\",\n      \"scope\": \"markup.strikethrough.markdown\",\n      \"settings\": {\n        \"fontStyle\": \"strikethrough\"\n      }\n    },\nThe tokenColors array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.\nShout out to xynny for the Blazing Red theme - way easier on my eyes than the default “Red” theme.\nAnother theme I tested (Military) had the same issue and the fix above worked for me."
+  },
+  {
+    "objectID": "posts/strikethrough-on-custom-vs-code-themes/index.html#code",
+    "href": "posts/strikethrough-on-custom-vs-code-themes/index.html#code",
+    "title": "Strikethrough on Custom VS Code Themes",
+    "section": "",
+    "text": "\"tokenColors\": [\n    {\n      \"name\": \"Strikethrough\",\n      \"scope\": \"markup.strikethrough.markdown\",\n      \"settings\": {\n        \"fontStyle\": \"strikethrough\"\n      }\n    },\nThe tokenColors array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.\nShout out to xynny for the Blazing Red theme - way easier on my eyes than the default “Red” theme.\nAnother theme I tested (Military) had the same issue and the fix above worked for me."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "phlo.info",
+    "section": "",
+    "text": "Why I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nOct 1, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrikethrough on Custom VS Code Themes\n\n\n\ntil\n\ntools\n\nide\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\nai\n\nmusic\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/how-i-built-this-blog/index.html",
@@ -112,31 +168,10 @@
     "text": "Bonus: Customize the look of the blog\ndiff --git a/_quarto.yml b/_quarto.yml\n--- a/_quarto.yml\n+++ b/_quarto.yml\n@@ -13,7 +13,7 @@ website:\n         href: https://twitter.com\n format:\n   html:\n-    theme: cosmo\n+    theme: lux\n     css: styles.css\ndiff --git a/about.qmd b/about.qmd\n--- a/about.qmd\n+++ b/about.qmd\n@@ -2,7 +2,7 @@\n title: \"About\"\n image: profile.jpg\n about:\n-  template: jolla\n+  template: broadside\n   links:\n     - icon: twitter\n       text: Twitter\ndiff --git a/index.qmd b/index.qmd\n--- a/index.qmd\n+++ b/index.qmd\n@@ -8,7 +8,7 @@ listing:\n   sort-ui: false\n   filter-ui: false\n page-layout: full\n-title-block-banner: true\n+title-block-banner: false\n ---\n\nTODO List\n\nAdd Custom Domain\nAdd Google Analytics"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
+    "href": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
+    "title": "Using Stable Audio Tools on Apple Silicon",
     "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "phlo.info",
-    "section": "",
-    "text": "How I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrikethrough on Custom VS Code Themes\n\n\n\ntil\n\n\ntools\n\n\nide\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\nai\n\n\nmusic\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/strikethrough-on-custom-vs-code-themes/index.html",
-    "href": "posts/strikethrough-on-custom-vs-code-themes/index.html",
-    "title": "Strikethrough on Custom VS Code Themes",
-    "section": "",
-    "text": "I ran into an issue with a custom VS Code theme that I downloaded from vscodethemes dot com. In any markdown file I opened the strikethrough was missing. If I reverted to a default theme, the strikethrough would re-appear.\nI was able to fix this (thanks to GPT4) by adding the following code to the theme.json file.\nOn Windows it was in C:\\Users\\{USERNAME}\\.vscode\\extensions\\{theme-id}\\themes\\theme.json on Mac it was in ~/.vscode/extensions/{theme-id}/themes/theme.json:\n\n\n    \"tokenColors\": [\n    {\n      \"name\": \"Strikethrough\",\n      \"scope\": \"markup.strikethrough.markdown\",\n      \"settings\": {\n        \"fontStyle\": \"strikethrough\"\n      }\n    },\nThe tokenColors array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.\nShout out to xynny for the Blazing Red theme - way easier on my eyes than the default “Red” theme.\nAnother theme I tested (Military) had the same issue and the fix above worked for me."
-  },
-  {
-    "objectID": "posts/strikethrough-on-custom-vs-code-themes/index.html#code",
-    "href": "posts/strikethrough-on-custom-vs-code-themes/index.html#code",
-    "title": "Strikethrough on Custom VS Code Themes",
-    "section": "",
-    "text": "\"tokenColors\": [\n    {\n      \"name\": \"Strikethrough\",\n      \"scope\": \"markup.strikethrough.markdown\",\n      \"settings\": {\n        \"fontStyle\": \"strikethrough\"\n      }\n    },\nThe tokenColors array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.\nShout out to xynny for the Blazing Red theme - way easier on my eyes than the default “Red” theme.\nAnother theme I tested (Military) had the same issue and the fix above worked for me."
+    "text": "Stable Audio Tools and Apple Silicon\nStable Audio Tools will default to using the CPU if it doesn’t detect a CUDA device. But it only takes a few adjustments of the original repo to make Stable Audio Tools utilize the Apple Silicon inside your machine if you have an M1 or better. Using a finetuned version of the base model I reduced my sample generation time from 51 seconds per generation (on cpu) to ~17 seconds per generation (on mps). This model was finetuned to generate samples only 3 seconds long but I was happy to cut inference time in half.\nHere are the commands I used to create a python environment for inferencing Stable Audio locally.\nBefore we get started:\n- Operating System\nProductName:        macOS\nProductVersion:     14.1\nBuildVersion:       23B2073\nKernel:             23.1.0\n\n- Environment\nzsh:        5.9 (x86_64-apple-darwin23.0)\nHomebrew:   4.3.5\nPython:     3.8.19\nNote: brew install python3.8 as brew is one of the easiest ways to manage multiple python version versions on the same machine.\n\n\nEnvironment Commands\ncd \"$HOME/code/ml/music/generation/\"\ngit clone https://github.com/Stability-AI/stable-audio-tools\ncd stable-audio-tools/\npython3.8 -m venv venv-sat\nvenv-sat/bin/python -m pip install --upgrade pip wheel\n# Something about setuptools 70 release broke pkg_resources\nvenv-sat/bin/python -m pip install setuptools==69.5.1\n\n# Activate the environment\nsource venv-sat/bin/activate\n\n# Run the remaining commands within the activated environment\npip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu\npip install .\n\n# INFERENCE\n# Base Model \npython run_gradio.py --ckpt-path models/base/model.ckpt --model-config models/base/model_config.json\n\n# Finetuned Model \npython run_gradio.py --ckpt-path models/finetune_banyan/model_banyan.ckpt --model-config models/finetune_banyan/model_config_banyan.json\n\n\nScript Commands\nThese are the adjustments I made to the python scripts in the repo: &gt;&gt;&gt; git diff\ndiff --git a/stable_audio_tools/inference/generation.py b/stable_audio_tools/inference/generation.py\nindex 843ab4b..74f4bb9 100644\n--- a/stable_audio_tools/inference/generation.py\n+++ b/stable_audio_tools/inference/generation.py\n@@ -14,7 +14,7 @@ def generate_diffusion_uncond(\n         batch_size: int = 1,\n         sample_size: int = 2097152,\n         seed: int = -1,\n-        device: str = \"cuda\",\n+        device: str = \"mps\",\n         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,\n         init_noise_level: float = 1.0,\n         return_latents = False,\n@@ -99,7 +99,7 @@ def generate_diffusion_cond(\n         sample_size: int = 2097152,\n         sample_rate: int = 48000,\n         seed: int = -1,\n-        device: str = \"cuda\",\n+        device: str = \"mps\",\n         init_audio: tp.Optional[tp.Tuple[int, torch.Tensor]] = None,\n         init_noise_level: float = 1.0,\n         mask_args: dict = None,\ndiff --git a/stable_audio_tools/interface/gradio.py b/stable_audio_tools/interface/gradio.py\nindex b46c8d4..a1b8b10 100644\n--- a/stable_audio_tools/interface/gradio.py\n+++ b/stable_audio_tools/interface/gradio.py\n@@ -665,7 +665,7 @@ def create_ui(model_config_path=None, ckpt_path=None, pretrained_name=None, pret\n     else:\n         model_config = None\n \n-    device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n+    device = torch.device(\"mps\" if torch.backends.mps.is_available() else \"cpu\")\n     _, model_config = load_model(model_config, ckpt_path, pretrained_name=pretrained_name, pretransform_ckpt_path=pretransform_ckpt_path, model_half=model_half, device=device)\n     \n     model_type = model_config[\"model_type\"]\nIn plain english that means I edited line 90 of .py\n\n\nInstalling asitop for monitoring\nIn my journey to utilize MPS I came across asitop. It allows you to monitor what percentage of your Apple GPU is being used in the CLI, among other things. After installing asitop into its own python venv I created an alias for asitop in ~/.zprofile making it easier to quickly open the monitor: alias asitop=\"sudo $HOME/code/asito/venv-asi/bin/asitop\"\nbrew install asitop probably works just as well."
   }
 ]

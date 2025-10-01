@@ -8,7 +8,7 @@
 
 <meta name="author" content="Phlo">
 
-<title>Strikethrough on Custom VS Code Themes – phlo.info</title>
+<title>Why I Built This Blog – phlo.info</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -107,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>
 
       .quarto-title-block .quarto-title-banner {
-        background-image: url(missing-strikethrough-on-custom-vs-code-themes.jpg);
+        background-image: url(why-i-built-this-blog.png);
 background-size: cover;
       }
 </style>
@@ -160,11 +125,9 @@ background-size: cover;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Strikethrough on Custom VS Code Themes</h1>
+      <h1 class="title">Why I Built This Blog</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">til</div>
-                <div class="quarto-category">tools</div>
-                <div class="quarto-category">ide</div>
+                <div class="quarto-category">web</div>
               </div>
                   </div>
   </div>
@@ -182,7 +145,7 @@ background-size: cover;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 12th</p>
+        <p class="date">October 1st</p>
       </div>
     </div>
     
@@ -201,27 +164,47 @@ background-size: cover;
 
 
 
-<section id="missing-strikethrough-on-custom-vs-code-themes" class="level1">
-<h1>Missing Strikethrough on Custom VS Code Themes</h1>
-<p>I ran into an issue with a custom VS Code theme that I downloaded from vscodethemes dot com. In any markdown file I opened the strikethrough was missing. If I reverted to a default theme, the strikethrough would re-appear.</p>
-<p>I was able to fix this (thanks to GPT4) by adding the following code to the <code>theme.json</code> file.</p>
-<p>On Windows it was in <code>C:\Users\{USERNAME}\.vscode\extensions\{theme-id}\themes\theme.json</code> on Mac it was in <code>~/.vscode/extensions/{theme-id}/themes/theme.json</code>:</p>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="er">"tokenColors":</span> <span class="ot">[</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Strikethrough"</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"scope"</span><span class="fu">:</span> <span class="st">"markup.strikethrough.markdown"</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"settings"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"fontStyle"</span><span class="fu">:</span> <span class="st">"strikethrough"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The <code>tokenColors</code> array will already exist in the theme.json file, you just need to add this object to the array. This will make the strikethrough appear in any markdown file that uses the custom theme.</p>
-<p>Shout out to xynny for the <a href="https://vscodethemes.com/e/xynny.blazing-red/blazing-red?language=python">Blazing Red</a> theme - way easier on my eyes than the default “Red” theme.</p>
-<p>Another theme I tested (<a href="https://marketplace.visualstudio.com/items?itemName=TechnoNinja.vsc-military-style">Military</a>) had the same issue and the fix above worked for me.</p>
-
-
+<p>A portfolio of projects, communicated through a blog.</p>
+<section id="why-a-blog" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-blog">Why a Blog?</h2>
+<p>I don’t have a portfolio. For years this has made it difficult to communicate my value.</p>
+<p>This is my living résumé. A demonstration of value to collaborators, clients, employers alike.</p>
+<p>The <em>plan</em> is multimodal posts. This blog extends the videos, images, and audio I already create for work and play. It’s a platform for structured thoughts (compared to tweets or short form content) more concise than long form videos. A public record of my journey through professional life.</p>
+<p>Ultimately: A way for friends to peer into whatever rabbit hole I’ve fallen down at the time.</p>
 </section>
+<section id="vision-for-content" class="level2">
+<h2 class="anchored" data-anchor-id="vision-for-content">Vision for Content</h2>
+<ol type="1">
+<li>Learning in public. Taking complex resources, breaking them down and explaining them in my own words. <a href="https://www.swyx.io/learn-in-public">(Inspiration)</a></li>
+<li>Deep Dive series. Focused explorations of topics like RLHF, Voice Agents, Evals and things near and dear to my heart like entrepreneurship, music.</li>
+<li>Building in public. Showcasing various tools, techniques, and workflows I use to complete projects.</li>
+</ol>
+</section>
+<section id="motivation-for-writing" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-for-writing">Motivation for Writing</h2>
+<ul>
+<li>Building a portfolio of interesting work is what I need to attract the right opportunities</li>
+<li>Documenting a body of work in the absence of formal credentials makes earning trust much easier</li>
+<li>Revisiting my journey will matter deeply to me in the future</li>
+</ul>
+<p>Everything that led me to this point has been poorly documented and I look back with regret today - imagine in 20 years.</p>
+<p>To expand on these points:</p>
+<p>In every job or project, there are 2 buckets of skills at play: My skills for optimizing a workflow and the skills I am actually being utilized for.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="skills-at-play.png" class="quarto-figure quarto-figure-center figure-img" alt="A venn diagram of the skills at play." height="300"></p>
+</figure>
+</div>
+<p>In almost every case recently, there’s not enough overlap. Which tells me I need to get better at communicating the benefits of my other skill sets.</p>
+<p>How else can I earn trust in my abilities when starting new relationships?</p>
+<p>Writing is also a way to honor my creative journey, so it does not die in the graveyard of the “projects” folder on my hard drive. I’ve been building tools to solve my own problems since 2019 (29 tools and counting) but most of that work has never seen the light of day.</p>
+<p>Finally, writing is about financial stability. The underlying goal is to make this a magnet for: projects I want to work on, people I want to work with, compensation that supports my family.</p>
+</section>
+<section id="mission" class="level2">
+<h2 class="anchored" data-anchor-id="mission">Mission</h2>
+<p>The goal is to attract the right opportunities, connect with fellow builders, and illuminate a path for others who, like me, are forging their own way.</p>
+
+
 </section>
 
 </main> <!-- /main -->
