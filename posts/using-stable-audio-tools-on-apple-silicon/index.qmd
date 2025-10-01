@@ -2,8 +2,10 @@
 title: "Using Stable Audio Tools on Apple Silicon"
 author: "Phlo"
 date: "2024-09-12"
+date-format: MMMM Do
 categories: [ai, music]
 image: stable-audio-open.png
+title-block-banner: stable-audio-open.png
 ---
 
 # Stable Audio Tools and Apple Silicon
