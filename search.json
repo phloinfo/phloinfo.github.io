@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
     "objectID": "posts/why-i-built-this-blog/index.html",
     "href": "posts/why-i-built-this-blog/index.html",
     "title": "Why I Built This Blog",
@@ -60,7 +53,14 @@
     "href": "index.html",
     "title": "phlo.info",
     "section": "",
-    "text": "Why I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nOct 1, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrikethrough on Custom VS Code Themes\n\n\n\ntil\n\ntools\n\nide\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\nai\n\nmusic\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\nNo matching items"
+    "text": "Why I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nOct 1, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built This Blog\n\n\n\nweb\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrikethrough on Custom VS Code Themes\n\n\n\ntil\n\n\ntools\n\n\nide\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing Stable Audio Tools on Apple Silicon\n\n\n\nai\n\n\nmusic\n\n\n\n\n\n\n\nPhlo\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
   },
   {
     "objectID": "posts/how-i-built-this-blog/index.html",
