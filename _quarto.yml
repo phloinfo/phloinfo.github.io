@@ -1,9 +1,11 @@
 project:
   type: website
   output-dir: gh-pages
-
+  preview:
+    port: 5567
 website:
   title: "phlo.info"
+  site-url: https://phlo.info
   navbar:
     right:
       - about.qmd
@@ -13,8 +15,5 @@ website:
         href: https://twitter.com/YoungPhlo_
 format:
   html:
-    theme: lux
+    theme: sandstone
     css: styles.css
-
-
-
