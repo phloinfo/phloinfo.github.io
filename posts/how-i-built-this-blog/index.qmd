@@ -2,8 +2,10 @@
 title: "How I Built This Blog"
 author: "Phlo"
 date: "2024-09-12"
+date-format: MMMM Do
 categories: [web]
 image: "how-i-built-this-blog-using-quarto.jpg"
+title-block-banner: "how-i-built-this-blog-using-quarto.jpg"
 ---
 A short walkthrough on the tools, commands and code used to build this blog with Quarto.
 
