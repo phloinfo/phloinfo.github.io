@@ -1,0 +1,53 @@
+---
+title: "Why I Built This Blog"
+author: "Phlo"
+date: "2025-10-01"
+date-format: MMMM Do
+categories: [web]
+image: why-i-built-this-blog.png
+title-block-banner: why-i-built-this-blog.png
+---
+
+A portfolio of projects, communicated through a blog.
+
+## Why a Blog?
+
+I don't have a portfolio. For years this has made it difficult to communicate my value.
+
+This is my living résumé. A demonstration of value to collaborators, clients, employers alike.
+
+The *plan* is multimodal posts. This blog extends the videos, images, and audio I already create for work and play. It's a platform for structured thoughts (compared to tweets or short form content) more concise than long form videos. A public record of my journey through professional life.
+
+Ultimately: A way for friends to peer into whatever rabbit hole I've fallen down at the time.
+
+## Vision for Content
+
+1. Learning in public. Taking complex resources, breaking them down and explaining them in my own words. [(Inspiration)](https://www.swyx.io/learn-in-public)
+2. Deep Dive series. Focused explorations of topics like RLHF, Voice Agents, Evals and things near and dear to my heart like entrepreneurship, music.
+3. Building in public. Showcasing various tools, techniques, and workflows I use to complete projects.
+
+## Motivation for Writing
+
+- Building a portfolio of interesting work is what I need to attract the right opportunities
+- Documenting a body of work in the absence of formal credentials makes earning trust much easier
+- Revisiting my journey will matter deeply to me in the future
+
+Everything that led me to this point has been poorly documented and I look back with regret today - imagine in 20 years.
+
+To expand on these points:
+
+In every job or project, there are 2 buckets of skills at play: My skills for optimizing a workflow and the skills I am actually being utilized for.
+
+![](skills-at-play.png){height=300 fig-align="center" fig-alt="A venn diagram of the skills at play."}
+
+In almost every case recently, there's not enough overlap. Which tells me I need to get better at communicating the benefits of my other skill sets.
+
+How else can I earn trust in my abilities when starting new relationships?
+
+Writing is also a way to honor my creative journey, so it does not die in the graveyard of the "projects" folder on my hard drive. I've been building tools to solve my own problems since 2019 (29 tools and counting) but most of that work has never seen the light of day.
+
+Finally, writing is about financial stability. The underlying goal is to make this a magnet for: projects I want to work on, people I want to work with, compensation that supports my family.
+
+## Mission
+
+The goal is to attract the right opportunities, connect with fellow builders, and illuminate a path for others who, like me, are forging their own way.
