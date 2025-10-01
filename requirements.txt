@@ -1,1 +1,1 @@
-requests==2.32.3
+mureq==0.2.0
