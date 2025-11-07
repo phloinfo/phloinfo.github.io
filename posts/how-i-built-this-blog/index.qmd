@@ -180,6 +180,17 @@ diff --git a/index.qmd b/index.qmd
 
 [Verify the domain within your username or organization](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages) using these steps.
 
+For users:
+```default
+https://github.com/settings/pages
+```
+
+For organizations:
+```default
+https://github.com/organizations/ORGANIZATION_NAME/settings/pages
+https://github.com/organizations/ORGANIZATION_NAME/settings/domains
+```
+
 Check [GitHub docs for managing a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) to be sure the following IPs are accurate.
 
 ### Namecheap
