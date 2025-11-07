@@ -22,7 +22,7 @@
     z-index: 2;
   }
 
-  /* Hide title block header on home page (listing page) */
+  /* Hide title block header on home page */
   .column-page-left #title-block-header {
     display: none;
   }
