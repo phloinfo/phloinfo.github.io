@@ -59,7 +59,7 @@ type NUL > .nojekyll
 ```
 :::
 
-**Add 2 folders to .gitignore**
+**Add 2 folders to `.gitignore`**
 
 ```default
 /.venv
@@ -347,12 +347,33 @@ Click the `+` button in the top left corner and select `Create Account` inside o
 
 Most of this process is very straightforward other than maybe the naming conventions.
 
-::: {.callout-caution collapse="true"}
-## TODO
-Add naming conventions
+::: {.callout-tip}
+## Naming Conventions
+
+When creating your Google Analytics account and property, follow these naming conventions:
+
+**Account Name:**
+
+- Use proper case (capitalize each word), e.g., `Company Name` or `Brand Identity`
+- Can be all one word if it looks good, otherwise separate words with proper capitalization
+
+**Property Name:**
+
+- Use the apex domain name (no `www`, no `https://`, no subdomains)
+- All lowercase, e.g., `companyname.info` or `brandidentity.com`
+
+**Stream Name:**
+
+- For simple single-domain setups, use the apex domain name (all lowercase) `brandidentity.com`
+- Can be more descriptive if you have multiple streams (e.g., `web`, `ios`, `android`)
+
+**Measurement ID:**
+
+- This is the `G-XXXXXXXXXX` code you'll add to your `_quarto.yml` file
+- Found in the web stream details after creating the data stream
 :::
 
-You mostly want to take the G-XXXXXXXXXX code and add it to the `_quarto.yml` file so Analytics can track the website.
+You mostly want to take the `G-XXXXXXXXXX` code and add it to the `_quarto.yml` file so Analytics can track the website.
 
 ### Search Console
 
