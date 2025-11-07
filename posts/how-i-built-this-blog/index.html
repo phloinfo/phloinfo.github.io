@@ -133,7 +133,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -208,7 +208,46 @@ background-size: cover;
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link active" data-scroll-target="#initial-setup">Initial Setup</a>
+  <ul class="collapse">
+  <li><a href="#install-quarto" id="toc-install-quarto" class="nav-link" data-scroll-target="#install-quarto">Install Quarto</a></li>
+  <li><a href="#prepare-ide" id="toc-prepare-ide" class="nav-link" data-scroll-target="#prepare-ide">Prepare IDE</a></li>
+  <li><a href="#set-up-github-repository" id="toc-set-up-github-repository" class="nav-link" data-scroll-target="#set-up-github-repository">Set up GitHub repository</a></li>
+  <li><a href="#initialize-quarto-blog-template" id="toc-initialize-quarto-blog-template" class="nav-link" data-scroll-target="#initialize-quarto-blog-template">Initialize Quarto Blog Template</a></li>
+  <li><a href="#change-output-dir-to-gh-pages" id="toc-change-output-dir-to-gh-pages" class="nav-link" data-scroll-target="#change-output-dir-to-gh-pages">Change output-dir to gh-pages</a></li>
+  <li><a href="#create-a-.nojekyll-file" id="toc-create-a-.nojekyll-file" class="nav-link" data-scroll-target="#create-a-.nojekyll-file">Create a .nojekyll file</a></li>
+  <li><a href="#add-2-folders-to-.gitignore" id="toc-add-2-folders-to-.gitignore" class="nav-link" data-scroll-target="#add-2-folders-to-.gitignore">Add 2 folders to .gitignore</a></li>
+  <li><a href="#create-requirements.txt-for-quarto-venv" id="toc-create-requirements.txt-for-quarto-venv" class="nav-link" data-scroll-target="#create-requirements.txt-for-quarto-venv">Create requirements.txt for Quarto venv</a></li>
+  <li><a href="#push-it-to-github" id="toc-push-it-to-github" class="nav-link" data-scroll-target="#push-it-to-github">Push it to github</a></li>
+  <li><a href="#one-time-publish-command" id="toc-one-time-publish-command" class="nav-link" data-scroll-target="#one-time-publish-command">One time publish command</a></li>
+  <li><a href="#change-repo-pages-settings" id="toc-change-repo-pages-settings" class="nav-link" data-scroll-target="#change-repo-pages-settings">Change repo Pages settings</a></li>
+  <li><a href="#configure-github-actions" id="toc-configure-github-actions" class="nav-link" data-scroll-target="#configure-github-actions">Configure GitHub Actions</a></li>
+  <li><a href="#render-and-preview" id="toc-render-and-preview" class="nav-link" data-scroll-target="#render-and-preview">Render and preview</a></li>
+  </ul></li>
+  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a>
+  <ul class="collapse">
+  <li><a href="#customize-the-look-of-the-blog" id="toc-customize-the-look-of-the-blog" class="nav-link" data-scroll-target="#customize-the-look-of-the-blog">Customize the look of the blog</a></li>
+  </ul></li>
+  <li><a href="#custom-domain" id="toc-custom-domain" class="nav-link" data-scroll-target="#custom-domain">Custom Domain</a>
+  <ul class="collapse">
+  <li><a href="#namecheap" id="toc-namecheap" class="nav-link" data-scroll-target="#namecheap">Namecheap</a></li>
+  <li><a href="#cloudflare" id="toc-cloudflare" class="nav-link" data-scroll-target="#cloudflare">Cloudflare</a></li>
+  </ul></li>
+  <li><a href="#google-analytics" id="toc-google-analytics" class="nav-link" data-scroll-target="#google-analytics">Google Analytics</a>
+  <ul class="collapse">
+  <li><a href="#search-console" id="toc-search-console" class="nav-link" data-scroll-target="#search-console">Search Console</a></li>
+  <li><a href="#namecheap-1" id="toc-namecheap-1" class="nav-link" data-scroll-target="#namecheap-1">Namecheap</a></li>
+  <li><a href="#cloudflare-1" id="toc-cloudflare-1" class="nav-link" data-scroll-target="#cloudflare-1">Cloudflare</a></li>
+  </ul></li>
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -217,34 +256,36 @@ background-size: cover;
 
 
 <p>A short walkthrough on the tools, commands and code used to build this blog with Quarto.</p>
-<section id="install-quarto" class="level2">
-<h2 class="anchored" data-anchor-id="install-quarto">Install Quarto</h2>
+<section id="initial-setup" class="level2">
+<h2 class="anchored" data-anchor-id="initial-setup">Initial Setup</h2>
+<section id="install-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="install-quarto">Install Quarto</h3>
 <ul>
-<li>Download and install from https://quarto.org/docs/download/</li>
+<li>Download and install from <a href="https://quarto.org/docs/download/">https://quarto.org/docs/download/</a></li>
 </ul>
 </section>
-<section id="prepare-ide" class="level2">
-<h2 class="anchored" data-anchor-id="prepare-ide">Prepare IDE</h2>
+<section id="prepare-ide" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-ide">Prepare IDE</h3>
 <ul>
 <li>Set up separate, portable VS Code used for technical writing</li>
 </ul>
 </section>
-<section id="set-up-github-repository" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-github-repository">Set up GitHub repository</h2>
+<section id="set-up-github-repository" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-github-repository">Set up GitHub repository</h3>
 <ul>
-<li>Create new repository on GitHub named <code>username.github.io</code>
+<li>Create new repository on GitHub named <code>USERNAME.github.io</code>
 <ul>
-<li>Any repo name other than <code>username.github.io</code> will be shown as <code>username.github.io/reponame/</code> on the web</li>
+<li>Any repo name other than <code>USERNAME.github.io</code> will be shown as <code>USERNAME.github.io/reponame/</code> on the web</li>
 </ul></li>
 <li>Clone it to local machine</li>
 </ul>
 </section>
-<section id="initialize-quarto-blog-template" class="level2">
-<h2 class="anchored" data-anchor-id="initialize-quarto-blog-template">Initialize Quarto Blog Template</h2>
+<section id="initialize-quarto-blog-template" class="level3">
+<h3 class="anchored" data-anchor-id="initialize-quarto-blog-template">Initialize Quarto Blog Template</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project <span class="at">--title</span> BLOG-NAME <span class="at">--type</span> website <span class="at">--template</span> blog</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="change-output-dir-to-gh-pages" class="level2">
-<h2 class="anchored" data-anchor-id="change-output-dir-to-gh-pages">Change output-dir to gh-pages</h2>
+<section id="change-output-dir-to-gh-pages" class="level3">
+<h3 class="anchored" data-anchor-id="change-output-dir-to-gh-pages">Change output-dir to gh-pages</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">diff --git a/_quarto.yml b/_quarto.yml</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">--- a/_quarto.yml</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/_quarto.yml</span></span>
@@ -256,43 +297,42 @@ background-size: cover;
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> website:</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   title: "BLOG-NAME"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="create-a-.nojekyll-file" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-.nojekyll-file">Create a .nojekyll file</h2>
+<section id="create-a-.nojekyll-file" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-.nojekyll-file">Create a .nojekyll file</h3>
 <p>Unix</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> .nojekyll</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Windows</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bat code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> NUL <span class="kw">&gt;</span> .nojekyll</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="add-2-folders-to-.gitignore" class="level2">
-<h2 class="anchored" data-anchor-id="add-2-folders-to-.gitignore">Add 2 folders to .gitignore</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>/venv</span>
+<section id="add-2-folders-to-.gitignore" class="level3">
+<h3 class="anchored" data-anchor-id="add-2-folders-to-.gitignore">Add 2 folders to .gitignore</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>/.venv</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>/gh-pages</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="create-requirements.txt-for-quarto-venv" class="level2">
-<h2 class="anchored" data-anchor-id="create-requirements.txt-for-quarto-venv">Create requirements.txt for Quarto venv</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>matplotlib==3.9.2</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pandas==2.2.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="create-requirements.txt-for-quarto-venv" class="level3">
+<h3 class="anchored" data-anchor-id="create-requirements.txt-for-quarto-venv">Create requirements.txt for Quarto venv</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mureq==0.2.0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="push-it-to-github" class="level2">
-<h2 class="anchored" data-anchor-id="push-it-to-github">Push it to github</h2>
+<section id="push-it-to-github" class="level3">
+<h3 class="anchored" data-anchor-id="push-it-to-github">Push it to github</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-S</span> <span class="at">-m</span> <span class="st">"initialize quarto blog template"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="one-time-publish-command" class="level2">
-<h2 class="anchored" data-anchor-id="one-time-publish-command">One time publish command</h2>
+<section id="one-time-publish-command" class="level3">
+<h3 class="anchored" data-anchor-id="one-time-publish-command">One time publish command</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish gh-pages</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="change-repo-pages-settings" class="level2">
-<h2 class="anchored" data-anchor-id="change-repo-pages-settings">Change repo Pages settings</h2>
+<section id="change-repo-pages-settings" class="level3">
+<h3 class="anchored" data-anchor-id="change-repo-pages-settings">Change repo Pages settings</h3>
+<p>Go to <code>https://github.com/USERNAME/USERNAME.github.io/settings/pages</code></p>
 <ul>
-<li>Go to <code>https://github.com/username/username.github.io/settings/pages</code></li>
 <li>Repo -&gt; Settings -&gt; Pages -&gt; Source -&gt; Branch: gh-pages</li>
 <li>Save</li>
 </ul>
 </section>
-<section id="configure-github-actions" class="level2">
-<h2 class="anchored" data-anchor-id="configure-github-actions">Configure GitHub Actions</h2>
+<section id="configure-github-actions" class="level3">
+<h3 class="anchored" data-anchor-id="configure-github-actions">Configure GitHub Actions</h3>
 <ul>
 <li><code>mkdir .github/workflows</code></li>
 <li>Add a workflow file to <code>.github/workflows/publish.yml</code></li>
@@ -331,12 +371,15 @@ background-size: cover;
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">env</span><span class="kw">:</span></span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">GITHUB_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="render-and-preview" class="level2">
-<h2 class="anchored" data-anchor-id="render-and-preview">Render and preview</h2>
+<section id="render-and-preview" class="level3">
+<h3 class="anchored" data-anchor-id="render-and-preview">Render and preview</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview <span class="at">--render</span> all</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="bonus-customize-the-look-of-the-blog" class="level2">
-<h2 class="anchored" data-anchor-id="bonus-customize-the-look-of-the-blog">Bonus: Customize the look of the blog</h2>
+</section>
+<section id="customization" class="level2">
+<h2 class="anchored" data-anchor-id="customization">Customization</h2>
+<section id="customize-the-look-of-the-blog" class="level3">
+<h3 class="anchored" data-anchor-id="customize-the-look-of-the-blog">Customize the look of the blog</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">diff --git a/_quarto.yml b/_quarto.yml</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">--- a/_quarto.yml</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/_quarto.yml</span></span>
@@ -369,15 +412,289 @@ background-size: cover;
 <span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="st">-title-block-banner: true</span></span>
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="va">+title-block-banner: false</span></span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a> ---</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="todo-list" class="level3">
-<h3 class="anchored" data-anchor-id="todo-list">TODO List</h3>
-<ul>
-<li>Add Custom Domain</li>
-<li>Add Google Analytics</li>
-</ul>
-
-
 </section>
+</section>
+<section id="custom-domain" class="level2">
+<h2 class="anchored" data-anchor-id="custom-domain">Custom Domain</h2>
+<p><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages">Verify the domain within your username or organization</a> using these steps.</p>
+<p>Check <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">GitHub docs for managing a custom domain</a> to be sure the following IPs are accurate.</p>
+<section id="namecheap" class="level3">
+<h3 class="anchored" data-anchor-id="namecheap">Namecheap</h3>
+<p>If your domain registrar is Namecheap, here are the steps today:</p>
+<p>Log in to Namecheap, find your domain name, click <code>Manage</code></p>
+<ul>
+<li><p>Go to <code>Advanced DNS</code></p></li>
+<li><p>Click <code>Add New Record</code></p></li>
+<li><p>Select <code>TXT</code> for type</p></li>
+<li><p>Add the Host: <code>_github-pages-challenge-USERNAME</code></p></li>
+</ul>
+<p>(Use the exact subdomain GitHub gives you)</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not add <code>.domain.com</code> to the host; Namecheap automatically appends the domain name.</p>
+</div>
+</div>
+<ul>
+<li>Add the Value: <code>0xhash5tring</code></li>
+</ul>
+<p>(Use the exact value GitHub gives you)</p>
+<ul>
+<li>Set the TTL to 1 min (shorter TTL helps propagation when testing)</li>
+<li>Check the green checkmark to save the record</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Check DNS Propagation Status
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can use the CLI to check if your TXT record has propagated:</p>
+<p><strong>Unix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> TXT _github-pages-challenge-USERNAME.domain.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Windows:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bat code-with-copy"><code class="sourceCode dosbat"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nslookup <span class="at">-type</span>=txt _github<span class="at">-pages-challenge-USERNAME</span>.domain.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It should only take a few minutes for the record to propagate. If it takes longer, something went wrong.</p>
+</div>
+</div>
+<hr>
+<p>Now it’s time to add four A records to Namecheap.</p>
+<p>You need to add A records for the following IPs: <code>185.199.108.153</code>, <code>185.199.109.153</code>, <code>185.199.110.153</code>, <code>185.199.111.153</code></p>
+<ul>
+<li>Click <code>Add New Record</code></li>
+<li>Select <code>A</code> for type</li>
+<li>Add the Host: <code>@</code></li>
+<li>Add the Value: <code>185.199.108.153</code></li>
+<li>Set the TTL to 1 min (shorter TTL helps propagation when testing)</li>
+<li>Check the green checkmark to save the record</li>
+</ul>
+<p>Repeat for the other three IPs:</p>
+<ul>
+<li><code>185.199.109.153</code></li>
+<li><code>185.199.110.153</code></li>
+<li><code>185.199.111.153</code></li>
+</ul>
+<p>Let’s also add a CNAME record for <code>www</code> to point to <code>USERNAME.github.io</code></p>
+<ul>
+<li>Click <code>Add New Record</code></li>
+<li>Select <code>CNAME</code> for type</li>
+<li>Add the Host: <code>www</code></li>
+<li>Add the Value: <code>USERNAME.github.io</code></li>
+<li>Set the TTL to 1 min (shorter TTL helps propagation when testing)</li>
+<li>Check the green checkmark to save the record</li>
+</ul>
+</section>
+<section id="cloudflare" class="level3">
+<h3 class="anchored" data-anchor-id="cloudflare">Cloudflare</h3>
+<p>If your domain registrar <strong>is not</strong> Cloudflare but you want to use their protection, sign up for a free account and point your nameservers to Cloudflare using the quick start guide.</p>
+<p>If your domain registrar <strong>is</strong> Cloudflare, here are the steps today:</p>
+<p>Log in to Cloudflare, locate your domain name on the left hand side, click it to ensure you’re on the correct domain</p>
+<ul>
+<li><p>Click <code>DNS</code> in the left hand sidebar</p></li>
+<li><p>Click <code>Records</code></p></li>
+<li><p>Click the blue <code>Add record</code> button</p></li>
+<li><p>Select <code>TXT</code> for type</p></li>
+<li><p>Add the Name: <code>_github-pages-challenge-USERNAME</code></p></li>
+</ul>
+<p>(Use the exact subdomain GitHub gives you)</p>
+<ul>
+<li>Add the Content: <code>0xhash5tring</code></li>
+</ul>
+<p>(Use the exact value GitHub gives you)</p>
+<ul>
+<li>Set the TTL to 1 min (shorter TTL helps propagation when testing)</li>
+<li>Click the blue <code>Save</code> button at the bottom right</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Check DNS Propagation Status
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can use the CLI to check if your TXT record has propagated:</p>
+<p><strong>Unix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> TXT _github-pages-challenge-USERNAME.domain.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Windows:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bat code-with-copy"><code class="sourceCode dosbat"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nslookup <span class="at">-type</span>=txt _github<span class="at">-pages-challenge-USERNAME</span>.domain.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It should only take a few minutes for the record to propagate. If it takes longer, something went wrong.</p>
+</div>
+</div>
+<hr>
+<p>Now it’s time to add four A records to Cloudflare.</p>
+<p>You need to add A records for the following IPs: <code>185.199.108.153</code>, <code>185.199.109.153</code>, <code>185.199.110.153</code>, <code>185.199.111.153</code></p>
+<ul>
+<li>Click the blue <code>Add record</code> button</li>
+<li>Select <code>A</code> for type</li>
+<li>Add the Name: <code>@</code></li>
+<li>Add the Content: <code>185.199.108.153</code></li>
+<li>Ensure the proxy status is set to “DNS only” (gray cloud icon) - GitHub Pages requires DNS-only mode</li>
+<li>Click the blue <code>Save</code> button</li>
+</ul>
+<p>Repeat for the other three IPs:</p>
+<ul>
+<li><code>185.199.109.153</code></li>
+<li><code>185.199.110.153</code></li>
+<li><code>185.199.111.153</code></li>
+</ul>
+<p>Let’s also add a CNAME record for <code>www</code> to point to <code>USERNAME.github.io</code></p>
+<ul>
+<li>Click the blue <code>Add record</code> button</li>
+<li>Select <code>CNAME</code> for type</li>
+<li>Add the Name: <code>www</code></li>
+<li>Add the Content: <code>USERNAME.github.io</code></li>
+<li>Ensure the proxy status is set to “DNS only” (gray cloud icon) - GitHub Pages requires DNS-only mode</li>
+<li>Click the blue <code>Save</code> button</li>
+</ul>
+<hr>
+<p>Allow a few moments for the DNS to propagate then Go to <code>https://github.com/USERNAME/USERNAME.github.io/settings/pages</code></p>
+<ul>
+<li>Add your custom domain (apex domain meaning no subdomain just <code>example.com</code>)</li>
+<li>Save</li>
+</ul>
+<p>Once the DNS check is successful move onto doing Google Analytics and Search Console.</p>
+<p>You will need to add another TXT record to verify ownership of website for Search Console.</p>
+</section>
+</section>
+<section id="google-analytics" class="level2">
+<h2 class="anchored" data-anchor-id="google-analytics">Google Analytics</h2>
+<p>Log in to Google Analytics and click the Admin cog wheel in the lower left corner.</p>
+<p>Click the <code>+</code> button in the top left corner and select <code>Create Account</code> inside of this Account will be your new GA property.</p>
+<p>Most of this process is very straightforward other than maybe the naming conventions.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>TODO
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Add naming conventions</p>
+</div>
+</div>
+</div>
+<p>You mostly want to take the G-XXXXXXXXXX code and add it to the <code>_quarto.yml</code> file so Analytics can track the website.</p>
+<section id="search-console" class="level3">
+<h3 class="anchored" data-anchor-id="search-console">Search Console</h3>
+<p>Log in to Google Analytics and click the Admin cog wheel in the lower left corner</p>
+<ul>
+<li><p>Admin &gt; Product Links &gt; Search Console Links &gt; Add Product Link</p></li>
+<li><p>Choose Search Console property &gt; Add property</p></li>
+</ul>
+<p>Open a new tab and log in to domain registrar (again) to add a <code>TXT</code> record to verify ownership of website for Search Console</p>
+<p>Log in to your registrar:</p>
+</section>
+<section id="namecheap-1" class="level3">
+<h3 class="anchored" data-anchor-id="namecheap-1">Namecheap</h3>
+<ul>
+<li><p>Find your domain name, click <code>Manage</code></p></li>
+<li><p>Go to <code>Advanced DNS</code></p></li>
+<li><p>Click <code>Add New Record</code></p></li>
+<li><p>Select <code>TXT</code> for type</p></li>
+<li><p>Add the Host: <code>@</code></p></li>
+<li><p>Add the Value: <code>google-site-verification=hash5tring</code></p></li>
+<li><p>Set the TTL to 1 min (shorter TTL helps propagation when testing)</p></li>
+<li><p>Check the green checkmark to save the record</p></li>
+</ul>
+</section>
+<section id="cloudflare-1" class="level3">
+<h3 class="anchored" data-anchor-id="cloudflare-1">Cloudflare</h3>
+<ul>
+<li><p>Find your domain name in the left sidebar and click it</p></li>
+<li><p>Click <code>DNS</code> in the left hand sidebar</p></li>
+<li><p>Click <code>Records</code></p></li>
+<li><p>Click the blue <code>Add record</code> button</p></li>
+<li><p>Select <code>TXT</code> for type</p></li>
+<li><p>Add the Name: <code>@</code></p></li>
+<li><p>Add the Content: <code>google-site-verification=hash5tring</code></p></li>
+<li><p>Set the TTL to 1 min (shorter TTL helps propagation when testing)</p></li>
+<li><p>Click the blue <code>Save</code> button at the bottom right</p></li>
+</ul>
+<hr>
+<p>Once verified return to Google Analytics</p>
+<ul>
+<li>Choose Search Console property &gt; Select Web Stream &gt; Review and Submit</li>
+</ul>
+</section>
+</section>
+<section id="configuration" class="level2">
+<h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
+<p>Here is an example of what your <code>_quarto.yml</code> file could look like once everything is set up:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> gh-pages</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">preview</span><span class="kw">:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">5678</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"example.com"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">right</span><span class="kw">:</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> about.qmd</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/USERNAME</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> twitter</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://twitter.com/USERNAME</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">site-url</span><span class="kw">:</span><span class="at"> https://example.com</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">google-analytics</span><span class="kw">:</span><span class="at"> G-XXXXXXXXXX</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">twitter-card</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">open-graph</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Don’t Forget!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before moving on, return to your domain registrar and reset all of the TTLs to <strong>Automatic</strong>.</p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

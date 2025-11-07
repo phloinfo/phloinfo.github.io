@@ -70,102 +70,39 @@
     "text": "A short walkthrough on the tools, commands and code used to build this blog with Quarto."
   },
   {
-    "objectID": "posts/how-i-built-this-blog/index.html#install-quarto",
-    "href": "posts/how-i-built-this-blog/index.html#install-quarto",
+    "objectID": "posts/how-i-built-this-blog/index.html#initial-setup",
+    "href": "posts/how-i-built-this-blog/index.html#initial-setup",
     "title": "How I Built This Blog",
-    "section": "Install Quarto",
-    "text": "Install Quarto\n\nDownload and install from https://quarto.org/docs/download/"
+    "section": "Initial Setup",
+    "text": "Initial Setup\n\nInstall Quarto\n\nDownload and install from https://quarto.org/docs/download/\n\n\n\nPrepare IDE\n\nSet up separate, portable VS Code used for technical writing\n\n\n\nSet up GitHub repository\n\nCreate new repository on GitHub named USERNAME.github.io\n\nAny repo name other than USERNAME.github.io will be shown as USERNAME.github.io/reponame/ on the web\n\nClone it to local machine\n\n\n\nInitialize Quarto Blog Template\nquarto create-project --title BLOG-NAME --type website --template blog\n\n\nChange output-dir to gh-pages\ndiff --git a/_quarto.yml b/_quarto.yml\n--- a/_quarto.yml\n+++ b/_quarto.yml\n@@ -1,5 +1,6 @@\n project:\n   type: website\n+  output-dir: gh-pages\n \n website:\n   title: \"BLOG-NAME\"\n\n\nCreate a .nojekyll file\nUnix\ntouch .nojekyll\nWindows\ntype NUL &gt; .nojekyll\n\n\nAdd 2 folders to .gitignore\n/.venv\n/gh-pages\n\n\nCreate requirements.txt for Quarto venv\nmureq==0.2.0\n\n\nPush it to github\ngit add .\ngit commit -S -m \"initialize quarto blog template\"\ngit push\n\n\nOne time publish command\nquarto publish gh-pages\n\n\nChange repo Pages settings\nGo to https://github.com/USERNAME/USERNAME.github.io/settings/pages\n\nRepo -&gt; Settings -&gt; Pages -&gt; Source -&gt; Branch: gh-pages\nSave\n\n\n\nConfigure GitHub Actions\n\nmkdir .github/workflows\nAdd a workflow file to .github/workflows/publish.yml\n\non:\n  workflow_dispatch:\n  push:\n    branches: main\n\nname: Quarto Publish\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v4\n\n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n\n      - name: Install Python and Dependencies\n        uses: actions/setup-python@v4\n        with:\n          python-version: '3.10'\n          cache: 'pip'\n      - run: pip install jupyter\n      - run: pip install -r requirements.txt\n\n      - name: Render and Publish\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n\n\nRender and preview\nquarto preview --render all"
   },
   {
-    "objectID": "posts/how-i-built-this-blog/index.html#prepare-ide",
-    "href": "posts/how-i-built-this-blog/index.html#prepare-ide",
+    "objectID": "posts/how-i-built-this-blog/index.html#customization",
+    "href": "posts/how-i-built-this-blog/index.html#customization",
     "title": "How I Built This Blog",
-    "section": "Prepare IDE",
-    "text": "Prepare IDE\n\nSet up separate, portable VS Code used for technical writing"
+    "section": "Customization",
+    "text": "Customization\n\nCustomize the look of the blog\ndiff --git a/_quarto.yml b/_quarto.yml\n--- a/_quarto.yml\n+++ b/_quarto.yml\n@@ -13,7 +13,7 @@ website:\n         href: https://twitter.com\n format:\n   html:\n-    theme: cosmo\n+    theme: lux\n     css: styles.css\ndiff --git a/about.qmd b/about.qmd\n--- a/about.qmd\n+++ b/about.qmd\n@@ -2,7 +2,7 @@\n title: \"About\"\n image: profile.jpg\n about:\n-  template: jolla\n+  template: broadside\n   links:\n     - icon: twitter\n       text: Twitter\ndiff --git a/index.qmd b/index.qmd\n--- a/index.qmd\n+++ b/index.qmd\n@@ -8,7 +8,7 @@ listing:\n   sort-ui: false\n   filter-ui: false\n page-layout: full\n-title-block-banner: true\n+title-block-banner: false\n ---"
   },
   {
-    "objectID": "posts/how-i-built-this-blog/index.html#set-up-github-repository",
-    "href": "posts/how-i-built-this-blog/index.html#set-up-github-repository",
+    "objectID": "posts/how-i-built-this-blog/index.html#custom-domain",
+    "href": "posts/how-i-built-this-blog/index.html#custom-domain",
     "title": "How I Built This Blog",
-    "section": "Set up GitHub repository",
-    "text": "Set up GitHub repository\n\nCreate new repository on GitHub named username.github.io\n\nAny repo name other than username.github.io will be shown as username.github.io/reponame/ on the web\n\nClone it to local machine"
+    "section": "Custom Domain",
+    "text": "Custom Domain\nVerify the domain within your username or organization using these steps.\nCheck GitHub docs for managing a custom domain to be sure the following IPs are accurate.\n\nNamecheap\nIf your domain registrar is Namecheap, here are the steps today:\nLog in to Namecheap, find your domain name, click Manage\n\nGo to Advanced DNS\nClick Add New Record\nSelect TXT for type\nAdd the Host: _github-pages-challenge-USERNAME\n\n(Use the exact subdomain GitHub gives you)\n\n\n\n\n\n\nWarning\n\n\n\nDo not add .domain.com to the host; Namecheap automatically appends the domain name.\n\n\n\nAdd the Value: 0xhash5tring\n\n(Use the exact value GitHub gives you)\n\nSet the TTL to 1 min (shorter TTL helps propagation when testing)\nCheck the green checkmark to save the record\n\n\n\n\n\n\n\nTipCheck DNS Propagation Status\n\n\n\nYou can use the CLI to check if your TXT record has propagated:\nUnix:\ndig TXT _github-pages-challenge-USERNAME.domain.com\nWindows:\nnslookup -type=txt _github-pages-challenge-USERNAME.domain.com\n\n\n\n\n\n\n\n\nNote\n\n\n\nIt should only take a few minutes for the record to propagate. If it takes longer, something went wrong.\n\n\n\nNow it’s time to add four A records to Namecheap.\nYou need to add A records for the following IPs: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153\n\nClick Add New Record\nSelect A for type\nAdd the Host: @\nAdd the Value: 185.199.108.153\nSet the TTL to 1 min (shorter TTL helps propagation when testing)\nCheck the green checkmark to save the record\n\nRepeat for the other three IPs:\n\n185.199.109.153\n185.199.110.153\n185.199.111.153\n\nLet’s also add a CNAME record for www to point to USERNAME.github.io\n\nClick Add New Record\nSelect CNAME for type\nAdd the Host: www\nAdd the Value: USERNAME.github.io\nSet the TTL to 1 min (shorter TTL helps propagation when testing)\nCheck the green checkmark to save the record\n\n\n\nCloudflare\nIf your domain registrar is not Cloudflare but you want to use their protection, sign up for a free account and point your nameservers to Cloudflare using the quick start guide.\nIf your domain registrar is Cloudflare, here are the steps today:\nLog in to Cloudflare, locate your domain name on the left hand side, click it to ensure you’re on the correct domain\n\nClick DNS in the left hand sidebar\nClick Records\nClick the blue Add record button\nSelect TXT for type\nAdd the Name: _github-pages-challenge-USERNAME\n\n(Use the exact subdomain GitHub gives you)\n\nAdd the Content: 0xhash5tring\n\n(Use the exact value GitHub gives you)\n\nSet the TTL to 1 min (shorter TTL helps propagation when testing)\nClick the blue Save button at the bottom right\n\n\n\n\n\n\n\nTipCheck DNS Propagation Status\n\n\n\nYou can use the CLI to check if your TXT record has propagated:\nUnix:\ndig TXT _github-pages-challenge-USERNAME.domain.com\nWindows:\nnslookup -type=txt _github-pages-challenge-USERNAME.domain.com\n\n\n\n\n\n\n\n\nNote\n\n\n\nIt should only take a few minutes for the record to propagate. If it takes longer, something went wrong.\n\n\n\nNow it’s time to add four A records to Cloudflare.\nYou need to add A records for the following IPs: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153\n\nClick the blue Add record button\nSelect A for type\nAdd the Name: @\nAdd the Content: 185.199.108.153\nEnsure the proxy status is set to “DNS only” (gray cloud icon) - GitHub Pages requires DNS-only mode\nClick the blue Save button\n\nRepeat for the other three IPs:\n\n185.199.109.153\n185.199.110.153\n185.199.111.153\n\nLet’s also add a CNAME record for www to point to USERNAME.github.io\n\nClick the blue Add record button\nSelect CNAME for type\nAdd the Name: www\nAdd the Content: USERNAME.github.io\nEnsure the proxy status is set to “DNS only” (gray cloud icon) - GitHub Pages requires DNS-only mode\nClick the blue Save button\n\n\nAllow a few moments for the DNS to propagate then Go to https://github.com/USERNAME/USERNAME.github.io/settings/pages\n\nAdd your custom domain (apex domain meaning no subdomain just example.com)\nSave\n\nOnce the DNS check is successful move onto doing Google Analytics and Search Console.\nYou will need to add another TXT record to verify ownership of website for Search Console."
   },
   {
-    "objectID": "posts/how-i-built-this-blog/index.html#initialize-quarto-blog-template",
-    "href": "posts/how-i-built-this-blog/index.html#initialize-quarto-blog-template",
+    "objectID": "posts/how-i-built-this-blog/index.html#google-analytics",
+    "href": "posts/how-i-built-this-blog/index.html#google-analytics",
     "title": "How I Built This Blog",
-    "section": "Initialize Quarto Blog Template",
-    "text": "Initialize Quarto Blog Template\nquarto create-project --title BLOG-NAME --type website --template blog"
+    "section": "Google Analytics",
+    "text": "Google Analytics\nLog in to Google Analytics and click the Admin cog wheel in the lower left corner.\nClick the + button in the top left corner and select Create Account inside of this Account will be your new GA property.\nMost of this process is very straightforward other than maybe the naming conventions.\n\n\n\n\n\n\nCautionTODO\n\n\n\n\n\nAdd naming conventions\n\n\n\nYou mostly want to take the G-XXXXXXXXXX code and add it to the _quarto.yml file so Analytics can track the website.\n\nSearch Console\nLog in to Google Analytics and click the Admin cog wheel in the lower left corner\n\nAdmin &gt; Product Links &gt; Search Console Links &gt; Add Product Link\nChoose Search Console property &gt; Add property\n\nOpen a new tab and log in to domain registrar (again) to add a TXT record to verify ownership of website for Search Console\nLog in to your registrar:\n\n\nNamecheap\n\nFind your domain name, click Manage\nGo to Advanced DNS\nClick Add New Record\nSelect TXT for type\nAdd the Host: @\nAdd the Value: google-site-verification=hash5tring\nSet the TTL to 1 min (shorter TTL helps propagation when testing)\nCheck the green checkmark to save the record\n\n\n\nCloudflare\n\nFind your domain name in the left sidebar and click it\nClick DNS in the left hand sidebar\nClick Records\nClick the blue Add record button\nSelect TXT for type\nAdd the Name: @\nAdd the Content: google-site-verification=hash5tring\nSet the TTL to 1 min (shorter TTL helps propagation when testing)\nClick the blue Save button at the bottom right\n\n\nOnce verified return to Google Analytics\n\nChoose Search Console property &gt; Select Web Stream &gt; Review and Submit"
   },
   {
-    "objectID": "posts/how-i-built-this-blog/index.html#change-output-dir-to-gh-pages",
-    "href": "posts/how-i-built-this-blog/index.html#change-output-dir-to-gh-pages",
+    "objectID": "posts/how-i-built-this-blog/index.html#configuration",
+    "href": "posts/how-i-built-this-blog/index.html#configuration",
     "title": "How I Built This Blog",
-    "section": "Change output-dir to gh-pages",
-    "text": "Change output-dir to gh-pages\ndiff --git a/_quarto.yml b/_quarto.yml\n--- a/_quarto.yml\n+++ b/_quarto.yml\n@@ -1,5 +1,6 @@\n project:\n   type: website\n+  output-dir: gh-pages\n \n website:\n   title: \"BLOG-NAME\""
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#create-a-.nojekyll-file",
-    "href": "posts/how-i-built-this-blog/index.html#create-a-.nojekyll-file",
-    "title": "How I Built This Blog",
-    "section": "Create a .nojekyll file",
-    "text": "Create a .nojekyll file\nUnix\ntouch .nojekyll\nWindows\ntype NUL &gt; .nojekyll"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#add-2-folders-to-.gitignore",
-    "href": "posts/how-i-built-this-blog/index.html#add-2-folders-to-.gitignore",
-    "title": "How I Built This Blog",
-    "section": "Add 2 folders to .gitignore",
-    "text": "Add 2 folders to .gitignore\n/venv\n/gh-pages"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#create-requirements.txt-for-quarto-venv",
-    "href": "posts/how-i-built-this-blog/index.html#create-requirements.txt-for-quarto-venv",
-    "title": "How I Built This Blog",
-    "section": "Create requirements.txt for Quarto venv",
-    "text": "Create requirements.txt for Quarto venv\nmatplotlib==3.9.2\npandas==2.2.2"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#push-it-to-github",
-    "href": "posts/how-i-built-this-blog/index.html#push-it-to-github",
-    "title": "How I Built This Blog",
-    "section": "Push it to github",
-    "text": "Push it to github\ngit add .\ngit commit -S -m \"initialize quarto blog template\"\ngit push"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#one-time-publish-command",
-    "href": "posts/how-i-built-this-blog/index.html#one-time-publish-command",
-    "title": "How I Built This Blog",
-    "section": "One time publish command",
-    "text": "One time publish command\nquarto publish gh-pages"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#change-repo-pages-settings",
-    "href": "posts/how-i-built-this-blog/index.html#change-repo-pages-settings",
-    "title": "How I Built This Blog",
-    "section": "Change repo Pages settings",
-    "text": "Change repo Pages settings\n\nGo to https://github.com/username/username.github.io/settings/pages\nRepo -&gt; Settings -&gt; Pages -&gt; Source -&gt; Branch: gh-pages\nSave"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#configure-github-actions",
-    "href": "posts/how-i-built-this-blog/index.html#configure-github-actions",
-    "title": "How I Built This Blog",
-    "section": "Configure GitHub Actions",
-    "text": "Configure GitHub Actions\n\nmkdir .github/workflows\nAdd a workflow file to .github/workflows/publish.yml\n\non:\n  workflow_dispatch:\n  push:\n    branches: main\n\nname: Quarto Publish\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v4\n\n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n\n      - name: Install Python and Dependencies\n        uses: actions/setup-python@v4\n        with:\n          python-version: '3.10'\n          cache: 'pip'\n      - run: pip install jupyter\n      - run: pip install -r requirements.txt\n\n      - name: Render and Publish\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#render-and-preview",
-    "href": "posts/how-i-built-this-blog/index.html#render-and-preview",
-    "title": "How I Built This Blog",
-    "section": "Render and preview",
-    "text": "Render and preview\nquarto preview --render all"
-  },
-  {
-    "objectID": "posts/how-i-built-this-blog/index.html#bonus-customize-the-look-of-the-blog",
-    "href": "posts/how-i-built-this-blog/index.html#bonus-customize-the-look-of-the-blog",
-    "title": "How I Built This Blog",
-    "section": "Bonus: Customize the look of the blog",
-    "text": "Bonus: Customize the look of the blog\ndiff --git a/_quarto.yml b/_quarto.yml\n--- a/_quarto.yml\n+++ b/_quarto.yml\n@@ -13,7 +13,7 @@ website:\n         href: https://twitter.com\n format:\n   html:\n-    theme: cosmo\n+    theme: lux\n     css: styles.css\ndiff --git a/about.qmd b/about.qmd\n--- a/about.qmd\n+++ b/about.qmd\n@@ -2,7 +2,7 @@\n title: \"About\"\n image: profile.jpg\n about:\n-  template: jolla\n+  template: broadside\n   links:\n     - icon: twitter\n       text: Twitter\ndiff --git a/index.qmd b/index.qmd\n--- a/index.qmd\n+++ b/index.qmd\n@@ -8,7 +8,7 @@ listing:\n   sort-ui: false\n   filter-ui: false\n page-layout: full\n-title-block-banner: true\n+title-block-banner: false\n ---\n\nTODO List\n\nAdd Custom Domain\nAdd Google Analytics"
+    "section": "Configuration",
+    "text": "Configuration\nHere is an example of what your _quarto.yml file could look like once everything is set up:\nproject:\n  type: website\n  output-dir: gh-pages\n  preview:\n    port: 5678\nwebsite:\n  title: \"example.com\"\n  navbar:\n    right:\n      - about.qmd\n      - icon: github\n        href: https://github.com/USERNAME\n      - icon: twitter\n        href: https://twitter.com/USERNAME\n  site-url: https://example.com\n  google-analytics: G-XXXXXXXXXX\n  twitter-card: true\n  open-graph: true\n\n\n\n\n\n\nImportantDon’t Forget!\n\n\n\nBefore moving on, return to your domain registrar and reset all of the TTLs to Automatic."
   },
   {
     "objectID": "posts/using-stable-audio-tools-on-apple-silicon/index.html",
