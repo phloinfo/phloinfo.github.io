@@ -13,22 +13,23 @@ A short walkthrough on the tools, commands and code used to build this blog with
 ## Initial Setup
 
 ### Install Quarto
+
 - Download and install from [https://quarto.org/docs/download/](https://quarto.org/docs/download/)
 
-### Prepare IDE
-- Set up separate, portable VS Code used for technical writing
-
 ### Set up GitHub repository
+
 - Create new repository on GitHub named `USERNAME.github.io`
   - Any repo name other than `USERNAME.github.io` will be shown as `USERNAME.github.io/reponame/` on the web
 - Clone it to local machine
 
 ### Initialize Quarto Blog Template
+
 ```sh
 quarto create-project --title BLOG-NAME --type website --template blog
 ```
- 
-### Change output-dir to gh-pages
+
+**Change output-dir to gh-pages**
+
 ```diff
 diff --git a/_quarto.yml b/_quarto.yml
 --- a/_quarto.yml
@@ -42,36 +43,44 @@ diff --git a/_quarto.yml b/_quarto.yml
    title: "BLOG-NAME"
 ```
 
-### Create a .nojekyll file
-Unix
+::: {.callout-tip}
+## Create a .nojekyll file
+
+You can use the CLI to create the `.nojekyll` file:
+
+**Unix:**
 ```sh
 touch .nojekyll
 ```
 
-Windows
+**Windows:**
 ```bat
 type NUL > .nojekyll
 ```
+:::
 
-### Add 2 folders to .gitignore
+**Add 2 folders to .gitignore**
+
 ```default
 /.venv
 /gh-pages
 ```
 
-### Create requirements.txt for Quarto venv
-```default
+**Create requirements.txt for Quarto venv**
+
+```py
 mureq==0.2.0
 ```
 
-### Push it to github
+### Push it to GitHub
 ```sh
 git add .
 git commit -S -m "initialize quarto blog template"
 git push
 ```
 
-### One time publish command
+**One time publish command**
+
 ```sh
 quarto publish gh-pages
 ```
