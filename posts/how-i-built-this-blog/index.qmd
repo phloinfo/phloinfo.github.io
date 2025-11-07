@@ -10,14 +10,14 @@ title-block-banner: "how-i-built-this-blog-using-quarto.jpg"
 A short walkthrough on the tools, commands and code used to build this blog with Quarto.
 
 ## Install Quarto
-- Download and install from https://quarto.org/docs/download/
+- Download and install from [https://quarto.org/docs/download/](https://quarto.org/docs/download/)
 
 ## Prepare IDE
 - Set up separate, portable VS Code used for technical writing
 
 ## Set up GitHub repository
-- Create new repository on GitHub named `username.github.io`
-  - Any repo name other than `username.github.io` will be shown as `username.github.io/reponame/` on the web
+- Create new repository on GitHub named `USERNAME.github.io`
+  - Any repo name other than `USERNAME.github.io` will be shown as `USERNAME.github.io/reponame/` on the web
 - Clone it to local machine
 
 ## Initialize Quarto Blog Template
@@ -52,14 +52,13 @@ type NUL > .nojekyll
 
 ## Add 2 folders to .gitignore
 ```default
-/venv
+/.venv
 /gh-pages
 ```
 
 ## Create requirements.txt for Quarto venv
 ```default
-matplotlib==3.9.2
-pandas==2.2.2
+mureq==0.2.0
 ```
 
 ## Push it to github
@@ -75,11 +74,14 @@ quarto publish gh-pages
 ```
 
 ## Change repo Pages settings
-- Go to `https://github.com/username/username.github.io/settings/pages`
+
+Go to `https://github.com/USERNAME/USERNAME.github.io/settings/pages`
+
 - Repo -> Settings -> Pages -> Source -> Branch: gh-pages
 - Save
 
 ## Configure GitHub Actions
+
 - `mkdir .github/workflows`
 - Add a workflow file to `.github/workflows/publish.yml`
 
@@ -160,6 +162,147 @@ diff --git a/index.qmd b/index.qmd
  ---
 ```
 
-### TODO List
-- Add Custom Domain
-- Add Google Analytics
+## Custom Domain
+
+Verify the domain within your username or organization using these steps from the [GitHub docs for verifying a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages).
+
+Check [GitHub docs for managing a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) to be sure the following IPs are accurate.
+
+### Namecheap
+
+If your domain registrar is Namecheap, here are the steps today:
+
+Log in to Namecheap, find your domain name, click `Manage`
+
+- Go to `Advanced DNS`
+- Click `Add New Record`
+- Select `TXT` for type
+
+- Add the Host: `_github-pages-challenge-USERNAME`
+
+(Use the exact subdomain GitHub gives you)
+
+::: {.callout-warning}
+Do not add `.domain.com` to the host; Namecheap automatically appends the domain name.
+:::
+
+- Add the Value: `0xhash5tring`
+
+(Use the exact value GitHub gives you)
+
+- Set the TTL to 1 min (shorter TTL helps propagation when testing)
+- Check the green checkmark to save the record
+
+::: {.callout-tip}
+## Check DNS Propagation Status
+
+You can use the CLI to check if your TXT record has propagated:
+
+**Unix:**
+```sh
+dig TXT _github-pages-challenge-USERNAME.domain.com
+```
+
+**Windows:**
+```bat
+nslookup -type=txt _github-pages-challenge-USERNAME.domain.com
+```
+:::
+
+::: {.callout-note}
+It should only take a few minutes for the record to propagate. If it takes longer, something went wrong.
+:::
+
+---
+
+Now it's time to add four A records to Namecheap.
+
+You need to add A records for the following IPs: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+
+- Click `Add New Record`
+- Select `A` for type
+- Add the Host: `@`
+- Add the Value: `185.199.108.153`
+- Set the TTL to 1 min (shorter TTL helps propagation when testing)
+- Check the green checkmark to save the record
+
+Repeat for the other three IPs:
+
+- `185.199.109.153`
+- `185.199.110.153`
+- `185.199.111.153`
+
+Let's also add a CNAME record for `www` to point to `USERNAME.github.io`
+
+- Click `Add New Record`
+- Select `CNAME` for type
+- Add the Host: `www`
+- Add the Value: `USERNAME.github.io`
+- Set the TTL to 1 min (shorter TTL helps propagation when testing)
+- Check the green checkmark to save the record
+
+Allow a few moments for the DNS to propagate then
+Go to `https://github.com/USERNAME/USERNAME.github.io/settings/pages`
+
+- Add your custom domain (apex domain meaning no subdomain just `example.com`)
+- Save
+
+Once the DNS check is successful move onto doing Google Analytics and Search Console.
+
+You will need to add another TXT record to verify ownership of website for Search Console.
+
+::: {.callout-caution collapse="true"}
+## TODO
+Add Cloudflare steps
+:::
+
+### Cloudflare
+
+If your domain registrar is Cloudflare, here are the steps today:
+
+## Google Analytics
+
+Log in to Google Analytics and click the Admin cog wheel in the lower left corner.
+
+Click the `+` button in the top left corner and select `Create Account` inside of this Account will be your new GA property.
+
+Most of this process is very straightforward other than maybe the naming conventions.
+
+::: {.callout-caution collapse="true"}
+## TODO
+Add naming conventions
+:::
+
+You mostly want to take the G-XXXXXXXXXX code and add it to the `_quarto.yml` file so Analytics can track the website.
+
+### Search Console
+
+Log in to Google Analytics and click the Admin cog wheel in the lower left corner
+
+- Admin > Product Links > Search Console Links > Add Product Link
+
+- Choose Search Console property > Add property
+
+Open a new tab and log in to domain registrar (again) to add a `TXT` record to verify ownership of website for Search Console
+
+Log in to Namecheap, find your domain name, click `Manage`
+
+- Go to `Advanced DNS`
+- Click `Add New Record`
+- Select `TXT` for type
+
+- Add the Host: `@`
+- Add the Value: `google-site-verification=hash5tring`
+- Set the TTL to 1 min (shorter TTL helps propagation when testing)
+- Check the green checkmark to save the record
+
+Once verified return to Google Analytics
+
+- Choose Search Console property > Select Web Stream > Review and Submit
+
+---
+
+::: {.callout-important}
+## Don't Forget!
+Before moving on, return to your domain registrar and reset all of the TTLs to **Automatic**.
+:::
