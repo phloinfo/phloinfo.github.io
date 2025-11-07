@@ -216,15 +216,9 @@ background-size: cover;
   <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link active" data-scroll-target="#initial-setup">Initial Setup</a>
   <ul class="collapse">
   <li><a href="#install-quarto" id="toc-install-quarto" class="nav-link" data-scroll-target="#install-quarto">Install Quarto</a></li>
-  <li><a href="#prepare-ide" id="toc-prepare-ide" class="nav-link" data-scroll-target="#prepare-ide">Prepare IDE</a></li>
   <li><a href="#set-up-github-repository" id="toc-set-up-github-repository" class="nav-link" data-scroll-target="#set-up-github-repository">Set up GitHub repository</a></li>
   <li><a href="#initialize-quarto-blog-template" id="toc-initialize-quarto-blog-template" class="nav-link" data-scroll-target="#initialize-quarto-blog-template">Initialize Quarto Blog Template</a></li>
-  <li><a href="#change-output-dir-to-gh-pages" id="toc-change-output-dir-to-gh-pages" class="nav-link" data-scroll-target="#change-output-dir-to-gh-pages">Change output-dir to gh-pages</a></li>
-  <li><a href="#create-a-.nojekyll-file" id="toc-create-a-.nojekyll-file" class="nav-link" data-scroll-target="#create-a-.nojekyll-file">Create a .nojekyll file</a></li>
-  <li><a href="#add-2-folders-to-.gitignore" id="toc-add-2-folders-to-.gitignore" class="nav-link" data-scroll-target="#add-2-folders-to-.gitignore">Add 2 folders to .gitignore</a></li>
-  <li><a href="#create-requirements.txt-for-quarto-venv" id="toc-create-requirements.txt-for-quarto-venv" class="nav-link" data-scroll-target="#create-requirements.txt-for-quarto-venv">Create requirements.txt for Quarto venv</a></li>
-  <li><a href="#push-it-to-github" id="toc-push-it-to-github" class="nav-link" data-scroll-target="#push-it-to-github">Push it to github</a></li>
-  <li><a href="#one-time-publish-command" id="toc-one-time-publish-command" class="nav-link" data-scroll-target="#one-time-publish-command">One time publish command</a></li>
+  <li><a href="#push-it-to-github" id="toc-push-it-to-github" class="nav-link" data-scroll-target="#push-it-to-github">Push it to GitHub</a></li>
   <li><a href="#change-repo-pages-settings" id="toc-change-repo-pages-settings" class="nav-link" data-scroll-target="#change-repo-pages-settings">Change repo Pages settings</a></li>
   <li><a href="#configure-github-actions" id="toc-configure-github-actions" class="nav-link" data-scroll-target="#configure-github-actions">Configure GitHub Actions</a></li>
   <li><a href="#render-and-preview" id="toc-render-and-preview" class="nav-link" data-scroll-target="#render-and-preview">Render and preview</a></li>
@@ -264,12 +258,6 @@ background-size: cover;
 <li>Download and install from <a href="https://quarto.org/docs/download/">https://quarto.org/docs/download/</a></li>
 </ul>
 </section>
-<section id="prepare-ide" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-ide">Prepare IDE</h3>
-<ul>
-<li>Set up separate, portable VS Code used for technical writing</li>
-</ul>
-</section>
 <section id="set-up-github-repository" class="level3">
 <h3 class="anchored" data-anchor-id="set-up-github-repository">Set up GitHub repository</h3>
 <ul>
@@ -283,9 +271,7 @@ background-size: cover;
 <section id="initialize-quarto-blog-template" class="level3">
 <h3 class="anchored" data-anchor-id="initialize-quarto-blog-template">Initialize Quarto Blog Template</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project <span class="at">--title</span> BLOG-NAME <span class="at">--type</span> website <span class="at">--template</span> blog</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="change-output-dir-to-gh-pages" class="level3">
-<h3 class="anchored" data-anchor-id="change-output-dir-to-gh-pages">Change output-dir to gh-pages</h3>
+<p><strong>Change output-dir to gh-pages</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">diff --git a/_quarto.yml b/_quarto.yml</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">--- a/_quarto.yml</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/_quarto.yml</span></span>
@@ -296,31 +282,35 @@ background-size: cover;
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> website:</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   title: "BLOG-NAME"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="create-a-.nojekyll-file" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-.nojekyll-file">Create a .nojekyll file</h3>
-<p>Unix</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Create a .nojekyll file
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can use the CLI to create the <code>.nojekyll</code> file:</p>
+<p><strong>Unix:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> .nojekyll</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Windows</p>
+<p><strong>Windows:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bat code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> NUL <span class="kw">&gt;</span> .nojekyll</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="add-2-folders-to-.gitignore" class="level3">
-<h3 class="anchored" data-anchor-id="add-2-folders-to-.gitignore">Add 2 folders to .gitignore</h3>
+</div>
+</div>
+<p><strong>Add 2 folders to <code>.gitignore</code></strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>/.venv</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>/gh-pages</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="create-requirements.txt-for-quarto-venv" class="level3">
-<h3 class="anchored" data-anchor-id="create-requirements.txt-for-quarto-venv">Create requirements.txt for Quarto venv</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mureq==0.2.0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Create requirements.txt for Quarto venv</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mureq<span class="op">==</span><span class="fl">0.2.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="push-it-to-github" class="level3">
-<h3 class="anchored" data-anchor-id="push-it-to-github">Push it to github</h3>
+<h3 class="anchored" data-anchor-id="push-it-to-github">Push it to GitHub</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-S</span> <span class="at">-m</span> <span class="st">"initialize quarto blog template"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="one-time-publish-command" class="level3">
-<h3 class="anchored" data-anchor-id="one-time-publish-command">One time publish command</h3>
+<p><strong>One time publish command</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish gh-pages</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="change-repo-pages-settings" class="level3">
@@ -599,23 +589,40 @@ Note
 <p>Log in to Google Analytics and click the Admin cog wheel in the lower left corner.</p>
 <p>Click the <code>+</code> button in the top left corner and select <code>Create Account</code> inside of this Account will be your new GA property.</p>
 <p>Most of this process is very straightforward other than maybe the naming conventions.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>TODO
+<span class="screen-reader-only">Tip</span>Naming Conventions
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Add naming conventions</p>
+<p>When creating your Google Analytics account and property, follow these naming conventions:</p>
+<p><strong>Account Name:</strong></p>
+<ul>
+<li>Use proper case (capitalize each word), e.g., <code>Company Name</code> or <code>Brand Identity</code></li>
+<li>Can be all one word if it looks good, otherwise separate words with proper capitalization</li>
+</ul>
+<p><strong>Property Name:</strong></p>
+<ul>
+<li>Use the apex domain name (no <code>www</code>, no <code>https://</code>, no subdomains)</li>
+<li>All lowercase, e.g., <code>companyname.info</code> or <code>brandidentity.com</code></li>
+</ul>
+<p><strong>Stream Name:</strong></p>
+<ul>
+<li>For simple single-domain setups, use the apex domain name (all lowercase) <code>brandidentity.com</code></li>
+<li>Can be more descriptive if you have multiple streams (e.g., <code>web</code>, <code>ios</code>, <code>android</code>)</li>
+</ul>
+<p><strong>Measurement ID:</strong></p>
+<ul>
+<li>This is the <code>G-XXXXXXXXXX</code> code you’ll add to your <code>_quarto.yml</code> file</li>
+<li>Found in the web stream details after creating the data stream</li>
+</ul>
 </div>
 </div>
-</div>
-<p>You mostly want to take the G-XXXXXXXXXX code and add it to the <code>_quarto.yml</code> file so Analytics can track the website.</p>
+<p>You mostly want to take the <code>G-XXXXXXXXXX</code> code and add it to the <code>_quarto.yml</code> file so Analytics can track the website.</p>
 <section id="search-console" class="level3">
 <h3 class="anchored" data-anchor-id="search-console">Search Console</h3>
 <p>Log in to Google Analytics and click the Admin cog wheel in the lower left corner</p>
