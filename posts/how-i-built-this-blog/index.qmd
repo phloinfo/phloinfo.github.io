@@ -6,26 +6,29 @@ date-format: MMMM Do
 categories: [web]
 image: "how-i-built-this-blog-using-quarto.jpg"
 title-block-banner: "how-i-built-this-blog-using-quarto.jpg"
+toc: true
 ---
 A short walkthrough on the tools, commands and code used to build this blog with Quarto.
 
-## Install Quarto
+## Initial Setup
+
+### Install Quarto
 - Download and install from [https://quarto.org/docs/download/](https://quarto.org/docs/download/)
 
-## Prepare IDE
+### Prepare IDE
 - Set up separate, portable VS Code used for technical writing
 
-## Set up GitHub repository
+### Set up GitHub repository
 - Create new repository on GitHub named `USERNAME.github.io`
   - Any repo name other than `USERNAME.github.io` will be shown as `USERNAME.github.io/reponame/` on the web
 - Clone it to local machine
 
-## Initialize Quarto Blog Template
+### Initialize Quarto Blog Template
 ```sh
 quarto create-project --title BLOG-NAME --type website --template blog
 ```
  
-## Change output-dir to gh-pages
+### Change output-dir to gh-pages
 ```diff
 diff --git a/_quarto.yml b/_quarto.yml
 --- a/_quarto.yml
@@ -39,7 +42,7 @@ diff --git a/_quarto.yml b/_quarto.yml
    title: "BLOG-NAME"
 ```
 
-## Create a .nojekyll file
+### Create a .nojekyll file
 Unix
 ```sh
 touch .nojekyll
@@ -50,37 +53,37 @@ Windows
 type NUL > .nojekyll
 ```
 
-## Add 2 folders to .gitignore
+### Add 2 folders to .gitignore
 ```default
 /.venv
 /gh-pages
 ```
 
-## Create requirements.txt for Quarto venv
+### Create requirements.txt for Quarto venv
 ```default
 mureq==0.2.0
 ```
 
-## Push it to github
+### Push it to github
 ```sh
 git add .
 git commit -S -m "initialize quarto blog template"
 git push
 ```
 
-## One time publish command
+### One time publish command
 ```sh
 quarto publish gh-pages
 ```
 
-## Change repo Pages settings
+### Change repo Pages settings
 
 Go to `https://github.com/USERNAME/USERNAME.github.io/settings/pages`
 
 - Repo -> Settings -> Pages -> Source -> Branch: gh-pages
 - Save
 
-## Configure GitHub Actions
+### Configure GitHub Actions
 
 - `mkdir .github/workflows`
 - Add a workflow file to `.github/workflows/publish.yml`
@@ -121,12 +124,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-## Render and preview
+### Render and preview
 ```sh
 quarto preview --render all
 ```
 
-## Bonus: Customize the look of the blog
+## Customization
+
+### Customize the look of the blog
 ```diff
 diff --git a/_quarto.yml b/_quarto.yml
 --- a/_quarto.yml
@@ -164,7 +169,7 @@ diff --git a/index.qmd b/index.qmd
 
 ## Custom Domain
 
-Verify the domain within your username or organization using these steps from the [GitHub docs for verifying a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages).
+[Verify the domain within your username or organization](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages) using these steps.
 
 Check [GitHub docs for managing a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) to be sure the following IPs are accurate.
 
@@ -241,6 +246,80 @@ Let's also add a CNAME record for `www` to point to `USERNAME.github.io`
 - Set the TTL to 1 min (shorter TTL helps propagation when testing)
 - Check the green checkmark to save the record
 
+### Cloudflare
+
+If your domain registrar **is not** Cloudflare but you want to use their protection, sign up for a free account and point your nameservers to Cloudflare using the quick start guide.
+
+If your domain registrar **is** Cloudflare, here are the steps today:
+
+Log in to Cloudflare, locate your domain name on the left hand side, click it to ensure you're on the correct domain
+
+- Click `DNS` in the left hand sidebar
+- Click `Records`
+- Click the blue `Add record` button
+- Select `TXT` for type
+
+- Add the Name: `_github-pages-challenge-USERNAME`
+
+(Use the exact subdomain GitHub gives you)
+
+- Add the Content: `0xhash5tring`
+
+(Use the exact value GitHub gives you)
+
+- Set the TTL to 1 min (shorter TTL helps propagation when testing)
+- Click the blue `Save` button at the bottom right
+
+::: {.callout-tip}
+## Check DNS Propagation Status
+
+You can use the CLI to check if your TXT record has propagated:
+
+**Unix:**
+```sh
+dig TXT _github-pages-challenge-USERNAME.domain.com
+```
+
+**Windows:**
+```bat
+nslookup -type=txt _github-pages-challenge-USERNAME.domain.com
+```
+:::
+
+::: {.callout-note}
+It should only take a few minutes for the record to propagate. If it takes longer, something went wrong.
+:::
+
+---
+
+Now it's time to add four A records to Cloudflare.
+
+You need to add A records for the following IPs: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+
+- Click the blue `Add record` button
+- Select `A` for type
+- Add the Name: `@`
+- Add the Content: `185.199.108.153`
+- Ensure the proxy status is set to "DNS only" (gray cloud icon) - GitHub Pages requires DNS-only mode
+- Click the blue `Save` button
+
+Repeat for the other three IPs:
+
+- `185.199.109.153`
+- `185.199.110.153`
+- `185.199.111.153`
+
+Let's also add a CNAME record for `www` to point to `USERNAME.github.io`
+
+- Click the blue `Add record` button
+- Select `CNAME` for type
+- Add the Name: `www`
+- Add the Content: `USERNAME.github.io`
+- Ensure the proxy status is set to "DNS only" (gray cloud icon) - GitHub Pages requires DNS-only mode
+- Click the blue `Save` button
+
+---
+
 Allow a few moments for the DNS to propagate then
 Go to `https://github.com/USERNAME/USERNAME.github.io/settings/pages`
 
@@ -250,15 +329,6 @@ Go to `https://github.com/USERNAME/USERNAME.github.io/settings/pages`
 Once the DNS check is successful move onto doing Google Analytics and Search Console.
 
 You will need to add another TXT record to verify ownership of website for Search Console.
-
-::: {.callout-caution collapse="true"}
-## TODO
-Add Cloudflare steps
-:::
-
-### Cloudflare
-
-If your domain registrar is Cloudflare, here are the steps today:
 
 ## Google Analytics
 
@@ -285,8 +355,11 @@ Log in to Google Analytics and click the Admin cog wheel in the lower left corne
 
 Open a new tab and log in to domain registrar (again) to add a `TXT` record to verify ownership of website for Search Console
 
-Log in to Namecheap, find your domain name, click `Manage`
+Log in to your registrar:
 
+### Namecheap
+
+- Find your domain name, click `Manage`
 - Go to `Advanced DNS`
 - Click `Add New Record`
 - Select `TXT` for type
@@ -296,11 +369,49 @@ Log in to Namecheap, find your domain name, click `Manage`
 - Set the TTL to 1 min (shorter TTL helps propagation when testing)
 - Check the green checkmark to save the record
 
+### Cloudflare
+
+- Find your domain name in the left sidebar and click it
+- Click `DNS` in the left hand sidebar
+- Click `Records`
+- Click the blue `Add record` button
+- Select `TXT` for type
+
+- Add the Name: `@`
+- Add the Content: `google-site-verification=hash5tring`
+- Set the TTL to 1 min (shorter TTL helps propagation when testing)
+- Click the blue `Save` button at the bottom right
+
+---
+
 Once verified return to Google Analytics
 
 - Choose Search Console property > Select Web Stream > Review and Submit
 
----
+## Configuration
+
+Here is an example of what your `_quarto.yml` file could look like once everything is set up:
+
+```yaml
+project:
+  type: website
+  output-dir: gh-pages
+  preview:
+    port: 5678
+website:
+  title: "example.com"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/USERNAME
+      - icon: twitter
+        href: https://twitter.com/USERNAME
+  site-url: https://example.com
+  google-analytics: G-XXXXXXXXXX
+  twitter-card: true
+  open-graph: true
+```
 
 ::: {.callout-important}
 ## Don't Forget!
